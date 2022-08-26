@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "9925efca-aa0a-4771-bff6-2bcc74012889",
+		"name": "Krea Cakes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login Check",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"acc_3\",\r\n    \"password\":\"123123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/kreas/login-check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kreas",
+						"login-check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "AC0bac09ec6b9eee0e901ad76d2224f845",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "3e87c9e70b0189579922ca7d5cf65add",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "To",
+							"value": "whatsapp:+628987122238",
+							"type": "default"
+						},
+						{
+							"key": "Body",
+							"value": "Test Message",
+							"type": "default"
+						},
+						{
+							"key": "From",
+							"value": "whatsapp:+14155238886",
+							"type": "default"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.twilio.com/2010-04-01/Accounts/AC0bac09ec6b9eee0e901ad76d2224f845/Messages.json",
+					"protocol": "https",
+					"host": [
+						"api",
+						"twilio",
+						"com"
+					],
+					"path": [
+						"2010-04-01",
+						"Accounts",
+						"AC0bac09ec6b9eee0e901ad76d2224f845",
+						"Messages.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"acc_2\",\r\n    \"price\":10000,\r\n    \"category\":\"cat_1\",\r\n    \"itemsName\":\"test item\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/kreas/insert-items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kreas",
+						"insert-items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Items",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Cart Items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"acc_3\",\r\n    \"itemsId\":\"itm_2\",\r\n    \"quantity\":6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/kreas/insert-cart-item",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kreas",
+						"insert-cart-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"acc_3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/kreas/clear-cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kreas",
+						"clear-cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay Cart",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
