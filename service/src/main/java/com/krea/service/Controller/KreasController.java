@@ -3,6 +3,9 @@ package com.krea.service.Controller;
 import com.krea.service.DAO.KreasDAO;
 import com.krea.service.payload.*;
 import org.apache.commons.codec.binary.Base64;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +13,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Entity;
@@ -20,10 +25,13 @@ import com.twilio.converter.Promoter;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
+@Validated
 @RequestMapping(value = "/kreas")
 public class KreasController{
     @Autowired
@@ -31,9 +39,8 @@ public class KreasController{
 
     Map<String, Object> outputParameter = new HashMap<>();
 
-    @GetMapping(path = "/login-check")
-    public Map<String, Object> login(@RequestBody LoginPayload loginPayload){
-
+    @PostMapping(path = "/login-check")
+    public Map<String, Object> login(@RequestBody @Valid  LoginPayload loginPayload){
 
         Map<String, Object> checkUsername = kreasDAO.usernameCheck(loginPayload.getUsername());
 
@@ -44,8 +51,21 @@ public class KreasController{
             if(checkLogin.get("returnvalue").toString() == "true"){
                 outputParameter.put("message", "Login Success");
                 outputParameter.put("status", "200");
+
+        Map<String, Object> test = kreasDAO.testingAccount(loginPayload.getUsername());
+        JSONObject object = new JSONObject(test.get("returnvalue"));
+        JSONObject account = new JSONObject(object.getString("value"));
+        Map<String, Object> account_details = new HashMap<>();
+        account_details.put("username", account.getString("username"));
+                account_details.put("role", account.getString("role"));
+                account_details.put("user_id", account.getString("user_id"));
+                account_details.put("phone", account.getString("phone"));
+                account_details.put("email", account.getString("email"));
+                account_details.put("balance", account.getInt("balance"));
+        outputParameter.put("data", account_details);
             }
             else {
+                outputParameter.put("data", null);
                 outputParameter.put("message", "Username and Password didn't match");
                 outputParameter.put("status", "500");
             }
@@ -127,7 +147,7 @@ public class KreasController{
         return outputParameter;
     }
 
-    @PostMapping(path = "/pay-cart")
+    @PutMapping(path = "/pay-cart")
     public Map<String, Object> payCart(@RequestBody PayCart payCart){
         Map<String, Object> checkCart = kreasDAO.checkCart(payCart.getUserId());
 

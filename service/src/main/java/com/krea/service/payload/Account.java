@@ -1,23 +1,22 @@
 package com.krea.service.payload;
 
-import org.springframework.validation.annotation.Validated;
-
-import javax.persistence.Entity;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-@Valid
-public class RegisterPayload {
-
-    @Valid
-    @NotNull(message = "Username is empty")
-    @Size(min = 6, max = 26, message = "Username should be between 6 and 26 characters")
+public class Account {
+    String user_id;
     String username;
     String password;
     String email;
     String role;
+    Integer balance;
+    String timestamp;
     String phone;
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getUsername() {
         return username;
@@ -49,6 +48,22 @@ public class RegisterPayload {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getPhone() {

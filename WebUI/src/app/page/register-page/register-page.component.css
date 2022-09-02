@@ -1,0 +1,88 @@
+html,
+body {
+  min-height: 100vh;
+  height: auto;
+}
+.top-section {
+  background-color: #4a6163;
+  border-radius: 15px 15px 0px 0px;
+  width: 40rem;
+  padding: 2rem 16px;
+  padding-bottom: 0;
+}
+
+.title {
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+
+.title > h1 {
+  font-weight: 900;
+  color: white;
+  letter-spacing: 6px;
+  z-index: 2;
+  font-size: 2.8em;
+}
+
+.text-shadow {
+  font-weight: 900;
+  font-size: 2.7em;
+  color: black;
+  opacity: 0.1;
+  letter-spacing: 7px;
+  position: absolute;
+  z-index: 0;
+  margin-left: 8px;
+  margin-top: 3px;
+}
+
+.input-form > p {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #ffc94b;
+  margin-bottom: 0px;
+}
+input,
+#role,
+option {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 5px;
+  margin: 0;
+  box-shadow: inset 4px 4px 15px 0px #00000096;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+input:active,
+#role,
+option {
+  border: none;
+  outline: none;
+}
+.question {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.question:hover {
+  color: #ffc94b;
+}
+.submit-button {
+  background-color: #ffc94b;
+  color: #4a6163;
+  border-radius: 0px 0px 15px 15px;
+  width: 40rem;
+}
+.submit-button,
+.submit-button > h1 {
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 0 0 15px 15px;
+}
+.submit-button > h1:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  border-radius: 0 0 15px 15px;
+}

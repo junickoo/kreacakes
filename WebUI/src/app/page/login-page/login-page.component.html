@@ -1,0 +1,48 @@
+<body style="display: grid; align-items: center; justify-content: center">
+  <div class="login">
+    <div class="container top-section">
+      <div class="title">
+        <h1>Login</h1>
+        <h1 class="text-shadow">Login</h1>
+      </div>
+      <div class="container px-5 py-3">
+        <div class="input-form">
+          <p>Username</p>
+          <input
+            type="text"
+            class="px-3"
+            id="username"
+            #username
+            name="username"
+          />
+        </div>
+        <div class="input-form">
+          <p>Password</p>
+          <input
+            type="password"
+            class="px-3"
+            id="password"
+            #password
+            name="password"
+          />
+        </div>
+        <div class="mt-4" style="display: flex; color: white">
+          <a style="flex: 1" class="question" routerLink="/register"
+            ><p class="text-center">Dont have an account?</p></a
+          >
+          <a style="flex: 1"
+            ><p class="text-center question">Forgot password?</p></a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="submit-button" (click)="loginAccount(username, password)">
+      <h1
+        class="text-center py-4"
+        style="font-weight: 900; letter-spacing: 1px"
+      >
+        Login
+      </h1>
+    </div>
+  </div>
+</body>

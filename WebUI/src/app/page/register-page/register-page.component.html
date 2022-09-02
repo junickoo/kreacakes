@@ -1,0 +1,58 @@
+<body style="display: grid; align-items: center; justify-content: center">
+  <div class="login">
+    <div class="container top-section pb-5">
+      <div class="title">
+        <h1>Register</h1>
+        <h1 class="text-shadow">Register</h1>
+      </div>
+      <div class="container px-5 py-3">
+        <div class="input-form">
+          <p>Username</p>
+          <input
+            type="text"
+            class="px-3"
+            id="username"
+            #username
+            name="username"
+          />
+        </div>
+        <div class="input-form">
+          <p>Password</p>
+          <input
+            type="password"
+            class="px-3"
+            id="password"
+            #password
+            name="password"
+          />
+        </div>
+        <div class="input-form">
+          <p>Email</p>
+          <input type="email" class="px-3" id="email" #email name="password" />
+        </div>
+        <div class="input-form">
+          <p>Phone</p>
+          <input type="phone" class="px-3" id="phone" #phone name="phone" />
+        </div>
+        <div class="input-form">
+          <p>Role</p>
+          <select name="role" id="role" class="px-3" #role>
+            <option value="customer">Customer</option>
+            <option value="seller">Seller</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div
+      class="submit-button"
+      (click)="registerAccount(username, password, email, phone, role)"
+    >
+      <h1
+        class="text-center py-4"
+        style="font-weight: 900; letter-spacing: 1px"
+      >
+        Register
+      </h1>
+    </div>
+  </div>
+</body>

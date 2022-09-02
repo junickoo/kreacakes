@@ -26,6 +26,16 @@ public class KreasDAO {
 
         return result;
     }
+    public Map<String, Object> testingAccount(String in_username){
+        jdbcCall = new SimpleJdbcCall(jdbcTemplate).withFunctionName("get_account").withSchemaName("public");
+
+        SqlParameterSource in = new MapSqlParameterSource().addValue("in_username", in_username);
+
+        Map<String, Object> result = jdbcCall.execute(in);
+
+        return result;
+    }
+
     public Map<String, Object> loginCheck(String in_username, String in_password){
         jdbcCall = new SimpleJdbcCall(jdbcTemplate).withFunctionName("funct_login").withSchemaName("public");
 
