@@ -1,0 +1,149 @@
+.component-background {
+  display: flex;
+  width: 80%;
+  margin: 3em auto;
+  height: 40em;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  color: #4a6163;
+}
+.item-image {
+  flex: 1;
+  display: flex;
+}
+.item-image > img {
+  width: 80%;
+  margin: auto;
+}
+
+.item-description {
+  flex: 1;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin: -15px 0 0 -10px;
+}
+
+.rating > p {
+  font-weight: 700;
+  opacity: 0.7;
+  margin: auto 0;
+}
+.item-description > p {
+  font-weight: 700;
+  color: #4a6163;
+}
+.item-description > h2 {
+  font-weight: 700;
+}
+.item-description > hr {
+  opacity: 1;
+  border: 1px solid #4a6163;
+}
+
+.store-name {
+  background-image: url(src/assets/icon/storeprofile.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  height: 5.3em;
+  width: 25em;
+  padding-left: 45px;
+  color: #ffc94b;
+}
+.store-name > p {
+  margin: auto;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.store-description {
+  display: flex;
+  align-items: center;
+}
+.store-description > span > img {
+  height: 2em;
+}
+.store-description > p {
+  margin: auto 0;
+  font-weight: 700;
+}
+
+.item-button {
+  flex: 1;
+  border: solid 3px #4a6163;
+  border-radius: 15px;
+  display: flex;
+  padding: 50px 0px;
+  justify-content: center;
+}
+.item-button-component {
+  width: 20em;
+}
+.item-button-component > p {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #4a6163;
+  font-size: 2em;
+}
+.quantity-btn {
+  display: flex;
+  width: 8em;
+  margin: 0px 0px 10px 0px;
+}
+.quantity-min,
+.quantity-plus {
+  display: flex;
+  flex: 1;
+  border: 2px #ffc94b solid;
+  font-weight: 700;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.quantity-min:hover,
+.quantity-plus:hover {
+  color: #ffc94b;
+  background-color: #4a6163;
+}
+.quantity-number {
+  display: flex;
+  flex: 2;
+  border-top: 2px #ffc94b solid;
+  border-bottom: 2px #ffc94b solid;
+  font-weight: 700;
+  cursor: default;
+}
+
+.buy-button {
+  display: flex;
+  gap: 5px;
+}
+.buy-button > button {
+  background-color: transparent;
+  border: #4a6163 2px solid;
+  flex: 1;
+  font-weight: 700;
+  color: #4a6163;
+  border-radius: 10px;
+  padding: 5px 0px;
+  transition: all 0.5s;
+}
+.buy-button-hover > button:hover {
+  background-color: #ffc94b;
+  color: #4a6163;
+}
+.share,
+.wishlist {
+  display: flex;
+  margin-top: 5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.share > p,
+.wishlist > p {
+  margin: auto 5px;
+  color: #4a6163;
+}

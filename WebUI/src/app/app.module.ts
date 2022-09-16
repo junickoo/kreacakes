@@ -10,6 +10,9 @@ import { HomepageComponent } from './page/homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterPageComponent } from './page/register-page/register-page.component';
 import { NavigationBarComponent } from './layout/navigation-bar/navigation-bar.component';
+import { RecommendationComponent } from './layout/recommendation/recommendation.component';
+import { CardComponent } from './items/card/card.component';
+import { ItemPageComponent } from './page/item-page/item-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { NavigationBarComponent } from './layout/navigation-bar/navigation-bar.c
     HomepageComponent,
     RegisterPageComponent,
     NavigationBarComponent,
+    RecommendationComponent,
+    CardComponent,
+    ItemPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +36,11 @@ import { NavigationBarComponent } from './layout/navigation-bar/navigation-bar.c
           component: HomepageComponent,
           canActivate: [AuthGuard],
         },
+        {
+          path: 'item',
+          component: ItemPageComponent,
+          canActivate: [AuthGuard],
+        },
         { path: 'login', component: LoginPageComponent },
         { path: 'register', component: RegisterPageComponent },
         { path: '**', component: LoginPageComponent, canActivate: [AuthGuard] },
@@ -38,6 +49,7 @@ import { NavigationBarComponent } from './layout/navigation-bar/navigation-bar.c
         useHash: true,
       }
     ),
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

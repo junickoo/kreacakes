@@ -1,0 +1,54 @@
+<div
+  class="component"
+  style="
+    display: flex;
+    gap: 1em;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <div
+    class="arrow-left"
+    style="
+      width: 3em;
+      height: 3em;
+      position: absolute;
+      z-index: 1;
+      margin-left: -71em;
+
+      cursor: pointer;
+    "
+  >
+    <img src="assets/icon/left-icons.svg" alt="" />
+  </div>
+  <app-card
+    [productsDetail]="products1"
+    (click)="itemsCard(products1)"
+  ></app-card
+  ><app-card
+    [productsDetail]="products2"
+    (click)="itemsCard(products2)"
+  ></app-card
+  ><app-card
+    [productsDetail]="products3"
+    (click)="itemsCard(products3)"
+  ></app-card
+  ><app-card
+    [productsDetail]="products4"
+    (click)="itemsCard(products4)"
+  ></app-card>
+  <div
+    class="arrow-left"
+    style="
+      width: 3em;
+      height: 3em;
+      position: absolute;
+      z-index: 1;
+      margin-left: 71em;
+      cursor: pointer;
+    "
+  >
+    <img src="assets/icon/right-icons.svg" alt="" />
+  </div>
+</div>

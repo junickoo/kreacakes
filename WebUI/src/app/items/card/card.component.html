@@ -1,0 +1,49 @@
+<div
+  class="card"
+  style="
+    display: grid;
+    background-color: white;
+    height: 12em;
+    width: 17em;
+    border-radius: 15px;
+  "
+>
+  <img
+    src="assets/products/product1.png"
+    style="width: 7em; margin: 5px auto -60px auto"
+  />
+  <div class="card-text" style="display: grid; margin: auto">
+    <p style="font-size: 1.3em; font-weight: 500; margin: 0 0">
+      {{ this.productsDetail.name }}
+    </p>
+    <div
+      class="price"
+      style="
+        display: flex;
+        margin-top: -5px;
+        font-size: 0.7em;
+        font-weight: 700;
+      "
+    >
+      <p style="margin: 0 0">
+        Rp. {{ this.productsDetail.price }} / {{ this.productsDetail.quan }} pcs
+      </p>
+    </div>
+    <div
+      class="rating"
+      style="
+        display: flex;
+        align-items: center;
+        margin-left: -5px;
+        margin-top: -3px;
+      "
+    >
+      <span
+        ><img src="assets/icon/star-icon.svg" style="height: 1.5em" alt=""
+      /></span>
+      <p style="margin: auto; flex: 1; font-size: 0.7em; font-weight: 700">
+        {{ this.productsDetail.rating }}/5 | Sold 1k+
+      </p>
+    </div>
+  </div>
+</div>

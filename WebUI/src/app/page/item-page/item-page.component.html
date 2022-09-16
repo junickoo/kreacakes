@@ -1,0 +1,78 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="component-background">
+  <div class="item-image">
+    <img src="assets/products/product1.png" alt="product image" />
+  </div>
+  <div class="item-description">
+    <h1 style="font-weight: 700">{{ details.name }}</h1>
+    <div class="rating">
+      <span><img src="assets/icon/star-icon-filled.svg" alt="" /></span>
+      <p>{{ details.rating }}/5 | Sold 1k+</p>
+    </div>
+    <h2>Rp. {{ details.price }} / {{ details.quan }} pcs</h2>
+    <hr />
+    <p>Category : Cookies</p>
+    <p>Customizable : No</p>
+    <div class="store-name">
+      <p>France Bakery</p>
+    </div>
+    <div class="store-description">
+      <span><img src="assets/icon/star-icon-filled.svg" alt="" /></span>
+      <p>Star Seller</p>
+      <p style="margin: auto 5px; font-weight: 600">|</p>
+      <span
+        ><img
+          src="assets/icon/verified-icon-filled.svg"
+          alt=""
+          style="height: 1.5em"
+      /></span>
+      <p>Verified</p>
+    </div>
+  </div>
+  <div class="item-button">
+    <div class="item-button-component">
+      <p>Quantity</p>
+      <div class="quantity-btn">
+        <div
+          class="quantity-min"
+          style="border-radius: 5px 0px 0px 5px"
+          (click)="minQuantity()"
+        >
+          <p style="margin: auto">-</p>
+        </div>
+        <div class="quantity-number">
+          <p style="margin: auto">{{ quantity }}</p>
+        </div>
+        <div
+          class="quantity-plus"
+          style="border-radius: 0px 5px 5px 0px"
+          (click)="plusQuantity()"
+        >
+          <p style="margin: auto">+</p>
+        </div>
+      </div>
+      <div class="buy-button" [ngClass]="{ 'buy-button-hover': quantity > 0 }">
+        <button class="cart" [disabled]="quantity < 1">+Cart</button>
+        <button class="checkout" [disabled]="quantity < 1">Checkout</button>
+      </div>
+      <div class="wishlist">
+        <span
+          ><img
+            src="assets/icon/love-icon-filled.svg"
+            alt=""
+            style="height: 1.5em"
+        /></span>
+        <p>Wishlist</p>
+      </div>
+      <div class="share">
+        <span
+          ><img
+            src="assets/icon/share-icon-filled.svg"
+            alt=""
+            style="height: 1.5em"
+        /></span>
+        <p>Share</p>
+      </div>
+    </div>
+  </div>
+</div>
