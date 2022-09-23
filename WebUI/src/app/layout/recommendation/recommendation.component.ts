@@ -14,28 +14,36 @@ export class RecommendationComponent implements OnInit {
   productsArray: object[] = [];
   constructor(private Router: Router) {
     this.products1 = {
-      name: 'Cookies',
-      price: '20.000',
-      quan: '6',
-      rating: '4,1',
+      items_id: 'itm_2',
+      user_id: 'acc_3',
+      items_name: 'Cookies Strawberry',
+      price: 100000,
+      rating_value: 4.5,
+      sold_amount: 100,
     };
     this.products2 = {
-      name: 'Cookies2',
-      price: '30.000',
-      quan: '16',
-      rating: '4,6',
+      items_id: 'itm_2',
+      user_id: 'acc_3',
+      items_name: 'Cookies Strawberry',
+      price: 100000,
+      rating_value: 4.5,
+      sold_amount: 100,
     };
     this.products3 = {
-      name: 'Cookies3',
-      price: '40.000',
-      quan: '',
-      rating: '4,5',
+      items_id: 'itm_2',
+      user_id: 'acc_3',
+      items_name: 'Cookies Strawberry',
+      price: 100000,
+      rating_value: 4.5,
+      sold_amount: 100,
     };
     this.products4 = {
-      name: 'Cookies4',
-      price: '40.000',
-      quan: '8',
-      rating: '5',
+      items_id: 'itm_2',
+      user_id: 'acc_3',
+      items_name: 'Cookies Strawberry',
+      price: 100000,
+      rating_value: 4.5,
+      sold_amount: 100,
     };
     this.productsArray = [
       this.products1,
@@ -53,8 +61,10 @@ export class RecommendationComponent implements OnInit {
   }
 }
 type product = {
-  name: string;
-  price: string;
-  quan: string;
-  rating: string;
+  items_id: string;
+  user_id: string;
+  items_name: string;
+  price: number;
+  rating_value: number;
+  sold_amount: number;
 };

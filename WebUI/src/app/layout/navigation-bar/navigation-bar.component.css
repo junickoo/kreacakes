@@ -50,3 +50,7 @@ nav {
   flex: 0;
   height: 2em;
 }
+
+.logo {
+  cursor: pointer;
+}

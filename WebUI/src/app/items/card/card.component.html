@@ -14,7 +14,7 @@
   />
   <div class="card-text" style="display: grid; margin: auto">
     <p style="font-size: 1.3em; font-weight: 500; margin: 0 0">
-      {{ this.productsDetail.name }}
+      {{ this.productsDetail.items_name }}
     </p>
     <div
       class="price"
@@ -25,9 +25,7 @@
         font-weight: 700;
       "
     >
-      <p style="margin: 0 0">
-        Rp. {{ this.productsDetail.price }} / {{ this.productsDetail.quan }} pcs
-      </p>
+      <p style="margin: 0 0">Rp. {{ this.productsDetail.price }}</p>
     </div>
     <div
       class="rating"
@@ -39,10 +37,13 @@
       "
     >
       <span
-        ><img src="assets/icon/star-icon.svg" style="height: 1.5em" alt=""
+        ><img
+          src="assets/icon/star-icon-filled.svg"
+          style="height: 1.5em"
+          alt=""
       /></span>
       <p style="margin: auto; flex: 1; font-size: 0.7em; font-weight: 700">
-        {{ this.productsDetail.rating }}/5 | Sold 1k+
+        {{ this.productsDetail.rating_value }}/5 | Sold 1k+
       </p>
     </div>
   </div>

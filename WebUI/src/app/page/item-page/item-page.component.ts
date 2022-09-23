@@ -1,3 +1,4 @@
+import { ItemCheckoutService } from './../../service/item-checkout.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-page.component.css'],
 })
 export class ItemPageComponent implements OnInit {
-  constructor() {}
+  constructor(private itemCheckoutService: ItemCheckoutService) {}
   details = JSON.parse(sessionStorage.getItem('itemDetails') || '{}');
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.details);
+  }
   quantity: number = 1;
   plusQuantity() {
     this.quantity += 1;
@@ -16,6 +19,19 @@ export class ItemPageComponent implements OnInit {
   minQuantity() {
     if (this.quantity > 0) {
       this.quantity -= 1;
+    }
+  }
+
+  addCart() {
+    this.itemCheckoutService
+      .addCart(this.details.user_id, this.details.items_id, this.quantity)
+      .subscribe((data) => this.validateCart(data));
+  }
+  validateCart(response: any) {
+    if (response.status == 200) {
+      alert('Items added to cart!');
+    } else {
+      alert('Failed to add items to cart');
     }
   }
 }

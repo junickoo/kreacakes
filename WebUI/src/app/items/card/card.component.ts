@@ -8,14 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardComponent implements OnInit {
   @Input() productsDetail = <product>{};
   constructor() {
-    this.productsDetail.name = 'test';
+    this.productsDetail.items_name = 'test';
   }
   ngOnInit(): void {}
 }
 
 type product = {
-  name: string;
-  price: string;
-  quan: string;
-  rating: string;
+  items_id: string;
+  user_id: string;
+  items_name: string;
+  price: number;
+  rating_value: number;
+  sold_amount: number;
 };

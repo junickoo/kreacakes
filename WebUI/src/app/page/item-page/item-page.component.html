@@ -4,12 +4,12 @@
     <img src="assets/products/product1.png" alt="product image" />
   </div>
   <div class="item-description">
-    <h1 style="font-weight: 700">{{ details.name }}</h1>
+    <h1 style="font-weight: 700">{{ details.items_name }}</h1>
     <div class="rating">
       <span><img src="assets/icon/star-icon-filled.svg" alt="" /></span>
-      <p>{{ details.rating }}/5 | Sold 1k+</p>
+      <p>{{ details.rating_value }}/5 | Sold {{ details.sold_amount }}</p>
     </div>
-    <h2>Rp. {{ details.price }} / {{ details.quan }} pcs</h2>
+    <h2>Rp. {{ details.price }}</h2>
     <hr />
     <p>Category : Cookies</p>
     <p>Customizable : No</p>
@@ -52,7 +52,9 @@
         </div>
       </div>
       <div class="buy-button" [ngClass]="{ 'buy-button-hover': quantity > 0 }">
-        <button class="cart" [disabled]="quantity < 1">+Cart</button>
+        <button class="cart" [disabled]="quantity < 1" (click)="addCart()">
+          +Cart
+        </button>
         <button class="checkout" [disabled]="quantity < 1">Checkout</button>
       </div>
       <div class="wishlist">
