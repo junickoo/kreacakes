@@ -1,0 +1,25 @@
+.quantity-btn {
+  display: flex;
+  width: 10em;
+  height: 2.5em;
+  margin: 0px 0px 0px 0px;
+}
+.quantity-min,
+.quantity-plus {
+  display: flex;
+  flex: 1;
+  border: 2px #4a6163 solid;
+  background-color: #ffc94b;
+  font-weight: 700;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.quantity-number {
+  display: flex;
+  flex: 2;
+  border-top: 2px #4a6163 solid;
+  border-bottom: 2px #4a6163 solid;
+  background-color: #ffc94b;
+  font-weight: 700;
+  cursor: default;
+}

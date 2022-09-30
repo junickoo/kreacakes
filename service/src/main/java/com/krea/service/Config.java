@@ -13,6 +13,6 @@ public class Config implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry){
-        registry.addMapping("/kreas/**").allowedOrigins("*").allowedHeaders(AUTHORIZATION, ACCEPT, CONTENT_TYPE, USER_AGENT).maxAge(30).allowedMethods("GET","POST","PUT");
+        registry.addMapping("/kreas/**").allowedOrigins("*").allowedHeaders(AUTHORIZATION, ACCEPT, CONTENT_TYPE, USER_AGENT).maxAge(30).allowedMethods("GET","POST","PUT", "DELETE");
     }
 }

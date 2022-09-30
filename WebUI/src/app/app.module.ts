@@ -13,6 +13,7 @@ import { NavigationBarComponent } from './layout/navigation-bar/navigation-bar.c
 import { RecommendationComponent } from './layout/recommendation/recommendation.component';
 import { CardComponent } from './items/card/card.component';
 import { ItemPageComponent } from './page/item-page/item-page.component';
+import { CartPageComponent } from './page/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ItemPageComponent } from './page/item-page/item-page.component';
     RecommendationComponent,
     CardComponent,
     ItemPageComponent,
+    CartPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,11 @@ import { ItemPageComponent } from './page/item-page/item-page.component';
         {
           path: 'item',
           component: ItemPageComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'cart',
+          component: CartPageComponent,
           canActivate: [AuthGuard],
         },
         { path: 'login', component: LoginPageComponent },

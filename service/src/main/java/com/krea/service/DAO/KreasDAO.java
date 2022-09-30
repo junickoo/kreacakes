@@ -1,7 +1,9 @@
 package com.krea.service.DAO;
 
+import com.krea.service.payload.CartItems;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -9,6 +11,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -79,7 +83,18 @@ public class KreasDAO {
 
         return "done";
     }
+    public List<Map<String, Object>> getCartItems(String in_user_id){
+        String sqlCartId ="select cart_id from cart where user_id = ? and paid = false;";
+        List<Map<String, Object>> listCart = jdbcTemplate.queryForList(sqlCartId, in_user_id);
+        System.out.println(listCart.get(0).get("cart_id"));
+        String in_cart_id = listCart.get(0).get("cart_id").toString();
 
+        String sql ="select * from cart_items inner join items on items.items_id = cart_items.items_id  where cart_id = ?";
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, in_cart_id);
+        System.out.println(list);
+
+        return list;
+    }
     public Map<String, Object> checkCart(String in_user_id){
         jdbcCall = new SimpleJdbcCall(jdbcTemplate).withFunctionName("check_cart").withSchemaName("public");
 
@@ -91,6 +106,12 @@ public class KreasDAO {
 
     public String payCart(String in_user_id){
         jdbcTemplate.update("CALL put_pay_cart(?)", in_user_id);
+
+        return "done";
+    }
+
+    public String deleteCartItems(String cart_items_id){
+        jdbcTemplate.update("DELETE from cart_items where cart_items_id = ? ", cart_items_id);
 
         return "done";
     }

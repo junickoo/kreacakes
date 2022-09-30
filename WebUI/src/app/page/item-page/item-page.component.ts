@@ -23,8 +23,9 @@ export class ItemPageComponent implements OnInit {
   }
 
   addCart() {
+    let userId = sessionStorage.getItem('user_id');
     this.itemCheckoutService
-      .addCart(this.details.user_id, this.details.items_id, this.quantity)
+      .addCart(userId, this.details.items_id, this.quantity)
       .subscribe((data) => this.validateCart(data));
   }
   validateCart(response: any) {

@@ -163,4 +163,39 @@ public class KreasController{
 
         return outputParameter;
     }
+
+    @PostMapping(path = "/get-cart-items")
+    public Map<String, Object> getCartItems(@RequestBody CartItems cartItems){
+        List<Map<String, Object>> output = kreasDAO.getCartItems(cartItems.getUserId());
+
+        if(output != null){
+//            kreasDAO.payCart(payCart.getUserId());
+            outputParameter.put("message", output);
+            outputParameter.put("status", "200");
+        }
+        else{
+            outputParameter.put("message", "Null");
+            outputParameter.put("status", "400");
+        }
+
+        return outputParameter;
+    }
+
+    @PutMapping(path = "/delete-cart-items")
+    public Map<String, Object> deleteCartItems(@RequestBody CartItemsDelete cartItemsDelete){
+        String output = kreasDAO.deleteCartItems(cartItemsDelete.getCartItemsId());
+        List<Map<String, Object>> outputMessage = kreasDAO.getCartItems(cartItemsDelete.getUserId());
+
+        if(outputMessage != null){
+//            kreasDAO.payCart(payCart.getUserId());
+            outputParameter.put("message", outputMessage);
+            outputParameter.put("status", "200");
+        }
+        else{
+            outputParameter.put("message", "Null");
+            outputParameter.put("status", "400");
+        }
+
+        return outputParameter;
+    }
 }
