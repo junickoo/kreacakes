@@ -1,0 +1,36 @@
+<body style="display: grid; align-items: center; justify-content: center">
+  <div class="login">
+    <div class="container top-section pb-5">
+      <div class="title">
+        <h1>Add Item</h1>
+        <h1 class="text-shadow">Add Item</h1>
+      </div>
+      <div class="container px-5 py-3">
+        <div class="input-form">
+          <p>Name</p>
+          <input type="text" class="px-3" id="name" #name name="name" />
+        </div>
+        <div class="input-form">
+          <p>Category</p>
+
+          <select id="category" #category name="category" class="px-3">
+            <option value="cat_1">cat_1</option>
+            <option value="cat_2">cat_2</option>
+          </select>
+        </div>
+        <div class="input-form">
+          <p>Price</p>
+          <input type="price" class="px-3" id="price" #price name="price" />
+        </div>
+      </div>
+    </div>
+    <div class="submit-button" (click)="addItem(name, category, price)">
+      <h1
+        class="text-center py-4"
+        style="font-weight: 900; letter-spacing: 1px"
+      >
+        Add Item
+      </h1>
+    </div>
+  </div>
+</body>

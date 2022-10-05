@@ -198,4 +198,12 @@ public class KreasController{
 
         return outputParameter;
     }
+
+    @PostMapping(path = "/get-item-seller")
+    public Map<String, Object> getItemSeller(@RequestBody PayCart payCart){
+        List<Map<String, Object>> output = kreasDAO.getItemSeller(payCart.getUserId());
+        outputParameter.put("message", output);
+        outputParameter.put("status", "400");
+        return outputParameter;
+    }
 }

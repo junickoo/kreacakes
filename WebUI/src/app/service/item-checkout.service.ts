@@ -35,6 +35,10 @@ export class ItemCheckoutService {
       userId: user_id,
     });
   }
+
+  snapApi() {
+    return this.http.post(ApiUrl.snapAPi, {});
+  }
 }
 // {
 //   'Content-Type': 'application/json',

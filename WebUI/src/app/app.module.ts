@@ -14,6 +14,11 @@ import { RecommendationComponent } from './layout/recommendation/recommendation.
 import { CardComponent } from './items/card/card.component';
 import { ItemPageComponent } from './page/item-page/item-page.component';
 import { CartPageComponent } from './page/cart-page/cart-page.component';
+import { SellerPageComponent } from './page/seller-page/seller-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { AddItemPageComponent } from './page/add-item-page/add-item-page.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,8 @@ import { CartPageComponent } from './page/cart-page/cart-page.component';
     CardComponent,
     ItemPageComponent,
     CartPageComponent,
+    SellerPageComponent,
+    AddItemPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +46,18 @@ import { CartPageComponent } from './page/cart-page/cart-page.component';
           canActivate: [AuthGuard],
         },
         {
+          path: 'seller',
+          component: SellerPageComponent,
+          canActivate: [AuthGuard],
+        },
+        {
           path: 'item',
           component: ItemPageComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'add-item',
+          component: AddItemPageComponent,
           canActivate: [AuthGuard],
         },
         {
@@ -57,6 +74,9 @@ import { CartPageComponent } from './page/cart-page/cart-page.component';
       }
     ),
     RouterModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

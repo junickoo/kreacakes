@@ -17,9 +17,18 @@ export class LoginPageComponent implements OnInit {
     this.checkIsLogin();
   }
   checkIsLogin() {
-    if (sessionStorage.getItem('isLogin') == 'true') {
+    if (
+      sessionStorage.getItem('isLogin') == 'true' &&
+      sessionStorage.getItem('role') == 'customer'
+    ) {
       console.log(sessionStorage.getItem('isLogin'));
       this.router.navigateByUrl('/homepage');
+    } else if (
+      sessionStorage.getItem('isLogin') == 'true' &&
+      sessionStorage.getItem('role') == 'seller'
+    ) {
+      console.log(sessionStorage.getItem('role'));
+      this.router.navigateByUrl('/seller');
     }
   }
   loginAccount(username: any, password: any) {

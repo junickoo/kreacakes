@@ -1,3 +1,5 @@
+import { SellerServiceService } from './seller-service.service';
+import { ApiUrl } from 'src/environments/url-list';
 import { Router } from '@angular/router';
 import { ServiceResponseService } from './../response/service-response.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +12,8 @@ export class LoginServiceService {
   constructor(
     private http: HttpClient,
     private response: ServiceResponseService,
-    private router: Router
+    private router: Router,
+    private seller: SellerServiceService
   ) {}
 
   checkLogin(username: String, password: String) {
@@ -39,6 +42,7 @@ export class LoginServiceService {
       sessionStorage.setItem('username', account.username);
       sessionStorage.setItem('role', account.role);
       sessionStorage.setItem('user_id', account.user_id);
+
       if (accountDetails.status == '200') {
         sessionStorage.setItem('isLogin', 'true');
       }

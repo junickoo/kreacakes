@@ -66,7 +66,7 @@ public class KreasDAO {
 
     public String deleteItem(String in_items_id, String in_user_id){
 
-        jdbcTemplate.update("call delete_items(?, ?)", in_items_id, in_user_id);
+        jdbcTemplate.update("delete from items where items_id = ? and user_id = ?", in_items_id, in_user_id);
 
         return "done";
     }
@@ -114,5 +114,13 @@ public class KreasDAO {
         jdbcTemplate.update("DELETE from cart_items where cart_items_id = ? ", cart_items_id);
 
         return "done";
+    }
+
+    public List<Map<String, Object>> getItemSeller(String in_user_id){
+        String sellerItem ="select * from items inner join category on  items.category_id = category.category_id where user_id = ?";
+        List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, in_user_id);
+        System.out.println(listItem);
+
+        return listItem;
     }
 }
