@@ -61,6 +61,11 @@ import { AddItemPageComponent } from './page/add-item-page/add-item-page.compone
           canActivate: [AuthGuard],
         },
         {
+          path: 'edit-item',
+          component: AddItemPageComponent,
+          canActivate: [AuthGuard],
+        },
+        {
           path: 'cart',
           component: CartPageComponent,
           canActivate: [AuthGuard],

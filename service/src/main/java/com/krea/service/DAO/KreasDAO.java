@@ -66,10 +66,17 @@ public class KreasDAO {
 
     public String deleteItem(String in_items_id, String in_user_id){
 
-        jdbcTemplate.update("delete from items where items_id = ? and user_id = ?", in_items_id, in_user_id);
+        jdbcTemplate.update("delete from items where items_id = ? and user_id_seller = ?", in_items_id, in_user_id);
 
         return "done";
     }
+    public String editItem(String in_items_id, String items_name, Integer price, String category){
+
+        jdbcTemplate.update("update items set items_name = ?, price = ?, category_id = ? where items_id = ?",items_name,price,category,in_items_id);
+
+        return "done";
+    }
+
 
     public String insertItemCart(String in_user_id, String in_items_id, Integer in_quantity){
 
@@ -117,10 +124,34 @@ public class KreasDAO {
     }
 
     public List<Map<String, Object>> getItemSeller(String in_user_id){
-        String sellerItem ="select * from items inner join category on  items.category_id = category.category_id where user_id = ?";
+        String sellerItem ="select * from items inner join category on  items.category_id = category.category_id where user_id_seller = ?";
         List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, in_user_id);
         System.out.println(listItem);
 
         return listItem;
     }
-}
+
+    public List<Map<String, Object>> getCategory(){
+        String sellerItem ="select * from category";
+        List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem);
+        System.out.println(listItem);
+
+        return listItem;
+    }
+    public List<Map<String, Object>> getOrderList(String seller_id){
+        String orderList = "\n" +
+                "select * from cart inner join cart_items on cart_items.cart_id = cart.cart_id inner join items on items.user_id_seller  = ? and cart_items.items_id = items.items_id  where cart.paid = true order by cart_items.sent  asc";
+        List<Map<String, Object>> listItem = jdbcTemplate.queryForList(orderList, seller_id);
+        System.out.println(listItem);
+
+        return listItem;
+    }
+    public String sendItem(String cart_items_id){
+
+        jdbcTemplate.update("update cart_items set sent = true where cart_items_id = ? ", cart_items_id);
+
+
+        return "done";
+    }
+
+  }

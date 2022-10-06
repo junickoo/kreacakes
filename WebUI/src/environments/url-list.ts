@@ -13,5 +13,10 @@ export class ApiUrl {
   public static readonly delItemSeller =
     'http://localhost:8080/kreas/delete-items';
   public static readonly addItem = 'http://localhost:8080/kreas/insert-items';
+  public static readonly editItem = 'http://localhost:8080/kreas/edit-items';
   public static readonly snapAPi = 'http://localhost:3000/';
+  public static readonly getCategory =
+    'http://localhost:8080/kreas/get-category';
+  public static readonly getOrder = 'http://localhost:8080/kreas/get-order';
+  public static readonly sendItem = 'http://localhost:8080/kreas/send-item';
 }

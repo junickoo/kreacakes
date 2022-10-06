@@ -30,8 +30,33 @@ export class SellerServiceService {
     });
   }
 
+  editItems(id: any, name: any, category: any, price: any) {
+    return this.http.post(ApiUrl.editItem, {
+      items_name: name,
+      price: price,
+      category: category,
+      items_id: id,
+    });
+  }
+
   setItem(response: any) {
     var responseTemp = JSON.stringify(response.message);
     sessionStorage.setItem('sellerItem', responseTemp);
+  }
+
+  getCategory() {
+    return this.http.get(ApiUrl.getCategory);
+  }
+
+  getOrder(user_id: any) {
+    return this.http.post(ApiUrl.getOrder, {
+      userId: user_id,
+    });
+  }
+
+  sendItem(cartItemId: any) {
+    return this.http.put(ApiUrl.sendItem, {
+      cart_items_id: cartItemId,
+    });
   }
 }

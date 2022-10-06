@@ -14,4 +14,9 @@ export class NavigationBarComponent implements OnInit {
   homeLink() {
     this.router.navigateByUrl('/homepage');
   }
+
+  logout() {
+    sessionStorage.clear();
+    window.location.reload();
+  }
 }
