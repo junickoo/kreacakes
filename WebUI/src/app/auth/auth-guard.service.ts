@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       const dialogRef = this.dialog.open(DialogOverviewComponent, {
         width: '250px',
         data: {
-          type: 'auth-guard',
+          type: 'login',
           message: 'Login First',
         },
       });

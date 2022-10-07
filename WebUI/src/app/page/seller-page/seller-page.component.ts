@@ -1,3 +1,8 @@
+import { MatDialog } from '@angular/material/dialog';
+import {
+  DataDelete,
+  DialogOverviewComponent,
+} from './../../layout/dialog-overview/dialog-overview.component';
 import { Router } from '@angular/router';
 import { SellerServiceService } from './../../service/seller-service.service';
 import { LoginServiceService } from 'src/app/service/login-service.service';
@@ -16,7 +21,8 @@ export class SellerPageComponent implements OnInit {
   constructor(
     private loginservice: LoginServiceService,
     private sellerService: SellerServiceService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     // this.dataSource = JSON.parse(sessionStorage.getItem('sellerItem') || '{}');
     this.sellerService
@@ -61,10 +67,18 @@ export class SellerPageComponent implements OnInit {
     this.router.navigateByUrl('/add-item');
   }
   deleteItem(item_id: any) {
-    this.sellerService
-      .deleteItem(item_id, this.userId)
-      .subscribe((resp) => console.log(resp));
-    window.location.reload();
+    const dialogRef = this.dialog.open(DialogOverviewComponent, {
+      width: '350px',
+      data: {
+        type: 'delete-items',
+        item_id: item_id,
+      },
+    });
+
+    // this.sellerService
+    //   .deleteItem(item_id, this.userId)
+    //   .subscribe((resp) => console.log(resp));
+    // window.location.reload();
   }
 
   editItem(item_id: any, name: any, price: any, sold: any, category: any) {

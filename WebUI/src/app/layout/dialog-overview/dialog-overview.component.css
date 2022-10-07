@@ -1,0 +1,9 @@
+.myClass {
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  background-color: red;
+}

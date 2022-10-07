@@ -1,7 +1,9 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SellerServiceService } from './../../service/seller-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DialogOverviewComponent } from 'src/app/layout/dialog-overview/dialog-overview.component';
 
 @Component({
   selector: 'app-add-item-page',
@@ -14,7 +16,8 @@ export class AddItemPageComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private seller: SellerServiceService,
-    private Router: Router
+    private Router: Router,
+    private dialog: MatDialog
   ) {
     this.pageConfig = window.location.hash;
     this.seller.getCategory().subscribe((data: any) => {
@@ -35,7 +38,25 @@ export class AddItemPageComponent implements OnInit {
       .addItems(name.value, category.value, price.value, this.userId)
       .subscribe((data: any) => {
         if (data.status == '200') {
-          this.Router.navigateByUrl('/seller');
+          const dialogRef = this.dialog.open(DialogOverviewComponent, {
+            width: '500px',
+            height: '500px',
+            data: {
+              type: 'message-only',
+              message: 'Items Added!',
+            },
+            panelClass: 'myClass',
+          });
+
+          dialogRef.afterOpened().subscribe(() =>
+            setTimeout(() => {
+              dialogRef.close();
+            }, 1500)
+          );
+
+          dialogRef.afterClosed().subscribe((result) => {
+            this.Router.navigateByUrl('/seller');
+          });
         }
       });
   }
@@ -45,10 +66,27 @@ export class AddItemPageComponent implements OnInit {
       .editItems(items_id, name.value, category.value, price.value)
       .subscribe((data: any) => {
         if (data.status == '200') {
-          this.Router.navigateByUrl('/seller');
+          const dialogRef = this.dialog.open(DialogOverviewComponent, {
+            width: '200px',
+            height: '200px',
+            data: {
+              type: 'message-only',
+              message: 'Items Edited!',
+            },
+            panelClass: 'myClass',
+          });
+
+          dialogRef.afterOpened().subscribe(() =>
+            setTimeout(() => {
+              dialogRef.close();
+            }, 1500)
+          );
+
+          dialogRef.afterClosed().subscribe((result) => {
+            this.Router.navigateByUrl('/seller');
+          });
         }
       });
-    alert('test');
   }
 }
 
