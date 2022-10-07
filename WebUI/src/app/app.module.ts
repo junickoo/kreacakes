@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { AddItemPageComponent } from './page/add-item-page/add-item-page.component';
+import { DialogOverviewComponent } from './layout/dialog-overview/dialog-overview.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AddItemPageComponent } from './page/add-item-page/add-item-page.compone
     CartPageComponent,
     SellerPageComponent,
     AddItemPageComponent,
+    DialogOverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +85,7 @@ import { AddItemPageComponent } from './page/add-item-page/add-item-page.compone
     BrowserAnimationsModule,
     MatTableModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

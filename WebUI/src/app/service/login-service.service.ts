@@ -1,3 +1,5 @@
+import { DialogOverviewComponent } from './../layout/dialog-overview/dialog-overview.component';
+import { MatDialog } from '@angular/material/dialog';
 import { SellerServiceService } from './seller-service.service';
 import { ApiUrl } from 'src/environments/url-list';
 import { Router } from '@angular/router';
@@ -13,7 +15,8 @@ export class LoginServiceService {
     private http: HttpClient,
     private response: ServiceResponseService,
     private router: Router,
-    private seller: SellerServiceService
+    private seller: SellerServiceService,
+    private dialog: MatDialog
   ) {}
 
   checkLogin(username: String, password: String) {
@@ -29,6 +32,7 @@ export class LoginServiceService {
 
   loginMessage: String = '';
   public isLogin: Boolean = false;
+  redirectUrl: any;
 
   getIsLogin() {
     return this.isLogin;
@@ -41,18 +45,45 @@ export class LoginServiceService {
       var account = accountDetails.data;
       sessionStorage.setItem('username', account.username);
       sessionStorage.setItem('role', account.role);
+      if (account.role == 'customer') {
+        this.redirectUrl = '/homepage';
+      } else if (account.role == 'seller') {
+        this.redirectUrl = '/seller';
+      }
       sessionStorage.setItem('user_id', account.user_id);
 
       if (accountDetails.status == '200') {
         sessionStorage.setItem('isLogin', 'true');
       }
-      this.router.navigate(['/homepage']);
+      // this.router.navigate(['/homepage']);
+      const dialogRef = this.dialog.open(DialogOverviewComponent, {
+        width: '250px',
+        data: {
+          type: 'login',
+          message: 'Login Success',
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        this.router.navigateByUrl(this.redirectUrl);
+      });
     } else {
       sessionStorage.clear();
       this.loginMessage = 'Login Failed';
+      const dialogRef = this.dialog.open(DialogOverviewComponent, {
+        width: '250px',
+        data: {
+          type: 'login',
+          message: accountDetails.message,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        window.location.reload();
+      });
     }
 
-    window.location.reload();
-    alert(accountDetails.message);
+    // window.location.reload();
+    // alert(accountDetails.message);
   }
 }

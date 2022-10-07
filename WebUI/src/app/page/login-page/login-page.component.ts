@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/service/login-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class LoginPageComponent implements OnInit {
   constructor(
     private loginService: LoginServiceService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
