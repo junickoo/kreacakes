@@ -1,5 +1,4 @@
 import { ControlService } from './service/control/control.service';
-import { TopperService } from './service/topper.service';
 import { ShapesService } from './service/shapes.service';
 import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
@@ -14,7 +13,6 @@ import { Color, WebGLRenderer } from 'three';
 export class DisplayBuilderComponent implements OnInit {
   constructor(
     private ShapesService: ShapesService,
-    private topper: TopperService,
     private control: ControlService
   ) {
     console.log(THREE);
@@ -46,7 +44,7 @@ export class DisplayBuilderComponent implements OnInit {
 
     this.control.cameraControl();
     this.control.shapesControl();
-    // this.control.topperControl();
+    this.control.topperControl();
 
     document.body.appendChild(this.renderer.domElement);
     this.render();
