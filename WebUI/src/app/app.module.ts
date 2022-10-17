@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddItemPageComponent } from './page/add-item-page/add-item-page.component';
 import { DialogOverviewComponent } from './layout/dialog-overview/dialog-overview.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DisplayBuilderComponent } from './page/display-builder/display-builder.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     SellerPageComponent,
     AddItemPageComponent,
     DialogOverviewComponent,
+    DisplayBuilderComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     RouterModule.forRoot(
       [
+        {
+          path: 'display-builder',
+          component: DisplayBuilderComponent,
+          canActivate: [AuthGuard],
+        },
         {
           path: 'homepage',
           component: HomepageComponent,
