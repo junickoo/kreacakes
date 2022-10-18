@@ -7,9 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   @Input() productsDetail = <product>{};
-  constructor() {
-    this.productsDetail.items_name = 'test';
-  }
+  constructor() {}
   ngOnInit(): void {}
 }
 
@@ -20,4 +18,5 @@ type product = {
   price: number;
   rating_value: number;
   sold_amount: number;
+  metadata: string;
 };

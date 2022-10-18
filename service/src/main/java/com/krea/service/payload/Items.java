@@ -6,6 +6,16 @@ public class Items {
     String category;
     String itemsName;
 
+    String metadata;
+
+    public String getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
+    }
+
     public String getUserId() {
         return userId;
     }

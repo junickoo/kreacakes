@@ -101,7 +101,7 @@ public class KreasController{
     @PostMapping(path = "/insert-items")
     public Map<String,Object> insItems(@RequestBody Items items){
 
-        kreasDAO.insertItem(items.getUserId(), items.getPrice(), items.getCategory(), items.getItemsName());
+        kreasDAO.insertItem(items.getUserId(), items.getPrice(), items.getCategory(), items.getItemsName(), items.getMetadata());
 
         outputParameter.put("message", "Items Added");
         outputParameter.put("status", "200");
@@ -243,6 +243,15 @@ public class KreasController{
         List<Map<String, Object>> output = kreasDAO.getOrderList(clearCart.getUserId());
         outputParameter.put("message", output);
         outputParameter.put("status", "200");
+        return outputParameter;
+    }
+
+    @GetMapping(path = "/get-recommendation")
+    public Map<String, Object> getRecommendation(){
+        List<Map<String, Object>> output = kreasDAO.getRecommendation();
+        outputParameter.put("message", output);
+        outputParameter.put("status", "200");
+
         return outputParameter;
     }
 }

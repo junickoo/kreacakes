@@ -21,12 +21,13 @@ export class SellerServiceService {
     });
   }
 
-  addItems(name: any, category: any, price: any, userId: any) {
+  addItems(name: any, category: any, price: any, userId: any, metadata: any) {
     return this.http.post(ApiUrl.addItem, {
       userId: userId,
       price: price,
       category: category,
       itemsName: name,
+      metadata: metadata,
     });
   }
 

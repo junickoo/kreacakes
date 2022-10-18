@@ -1,5 +1,12 @@
+import { Router } from '@angular/router';
+import { SellerServiceService } from './../../../../service/seller-service.service';
 import { ShapesService } from '../shapes.service';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  DataDelete,
+  DialogOverviewComponent,
+} from '../../../../layout/dialog-overview/dialog-overview.component';
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
 
@@ -7,11 +14,61 @@ import * as dat from 'dat.gui';
   providedIn: 'root',
 })
 export class ControlService {
-  constructor(private ShapesService: ShapesService) {}
+  constructor(
+    private ShapesService: ShapesService,
+    private seller: SellerServiceService,
+    private dialog: MatDialog,
+    private Router: Router
+  ) {}
   gui = new dat.GUI();
   cakeShapes = {
     shape: 'Cube',
   };
+  savingControl(metadata: any) {
+    var saving = {
+      metadata: () => {
+        console.log(metadata);
+
+        var detailsAdd: product = JSON.parse(
+          sessionStorage.getItem('detailsAddItem') || ''
+        );
+        this.seller
+          .addItems(
+            detailsAdd.itemsName,
+            detailsAdd.category,
+            detailsAdd.price,
+            detailsAdd.userId,
+            metadata
+          )
+          .subscribe((data: any) => {
+            alert(JSON.stringify(data.data || ''));
+            if (data.status == '200') {
+              const dialogRef = this.dialog.open(DialogOverviewComponent, {
+                width: '500px',
+                height: '500px',
+                data: {
+                  type: 'message-only',
+                  message: 'Items Added!',
+                },
+                panelClass: 'myClass',
+              });
+
+              dialogRef.afterOpened().subscribe(() =>
+                setTimeout(() => {
+                  dialogRef.close();
+                }, 1500)
+              );
+
+              dialogRef.afterClosed().subscribe((result) => {
+                this.gui.destroy();
+                this.Router.navigateByUrl('/seller');
+              });
+            }
+          });
+      },
+    };
+    this.gui.add(saving, 'metadata').name('Save');
+  }
   cameraControl() {
     const cameraControl = this.gui.addFolder('Camera');
     cameraControl
@@ -25,7 +82,7 @@ export class ControlService {
       .name('Rotate Z');
   }
 
-  shapesControl() {
+  shapesControl(metadata: any) {
     const params = {
       color: 0xfffff,
     };
@@ -34,8 +91,10 @@ export class ControlService {
       generateShape: () => {
         this.gui.destroy();
         this.gui = new dat.GUI();
+
+        this.savingControl(metadata);
         this.cameraControl();
-        this.shapesControl();
+        this.shapesControl(metadata);
         this.topperControl();
         this.ShapesService.cake(this.cakeShapes.shape);
       },
@@ -152,3 +211,10 @@ export class ControlService {
     this.ShapesService.group.add(cherry);
   }
 }
+
+type product = {
+  itemsName: string;
+  price: number;
+  category: string;
+  userId: string;
+};

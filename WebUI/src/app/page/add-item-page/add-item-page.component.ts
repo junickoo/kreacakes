@@ -32,33 +32,44 @@ export class AddItemPageComponent implements OnInit {
 
   object: Details = JSON.parse(this.detailsItem || '{}');
 
+  // addItem(name: any, category: any, price: any, metadata: any) {
+  //   console.log(category.value);
+  //   this.seller
+  //     .addItems(name.value, category.value, price.value, this.userId, metadata)
+  //     .subscribe((data: any) => {
+  //       if (data.status == '200') {
+  //         const dialogRef = this.dialog.open(DialogOverviewComponent, {
+  //           width: '500px',
+  //           height: '500px',
+  //           data: {
+  //             type: 'message-only',
+  //             message: 'Items Added!',
+  //           },
+  //           panelClass: 'myClass',
+  //         });
+
+  //         dialogRef.afterOpened().subscribe(() =>
+  //           setTimeout(() => {
+  //             dialogRef.close();
+  //           }, 1500)
+  //         );
+
+  //         dialogRef.afterClosed().subscribe((result) => {
+  //           this.Router.navigateByUrl('/seller');
+  //         });
+  //       }
+  //     });
+  // }
+
   addItem(name: any, category: any, price: any) {
-    console.log(category.value);
-    this.seller
-      .addItems(name.value, category.value, price.value, this.userId)
-      .subscribe((data: any) => {
-        if (data.status == '200') {
-          const dialogRef = this.dialog.open(DialogOverviewComponent, {
-            width: '500px',
-            height: '500px',
-            data: {
-              type: 'message-only',
-              message: 'Items Added!',
-            },
-            panelClass: 'myClass',
-          });
-
-          dialogRef.afterOpened().subscribe(() =>
-            setTimeout(() => {
-              dialogRef.close();
-            }, 1500)
-          );
-
-          dialogRef.afterClosed().subscribe((result) => {
-            this.Router.navigateByUrl('/seller');
-          });
-        }
-      });
+    var detailsAddItem = {
+      userId: this.userId,
+      price: price.value,
+      category: category.value,
+      itemsName: name.value,
+    };
+    sessionStorage.setItem('detailsAddItem', JSON.stringify(detailsAddItem));
+    this.Router.navigateByUrl('/display-builder');
   }
   editItem(name: any, category: any, price: any) {
     let items_id = this.object.items_id;

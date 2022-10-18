@@ -57,9 +57,9 @@ public class KreasDAO {
         return "test";
     }
 
-    public String insertItem(String in_user_id, Integer in_price, String in_category_id, String in_items_name){
+    public String insertItem(String in_user_id, Integer in_price, String in_category_id, String in_items_name, String metadata){
 
-        jdbcTemplate.update("call ins_items(?, ?, ?, ?)", in_user_id, in_price, in_category_id, in_items_name);
+        jdbcTemplate.update("call ins_items(?, ?, ?, ?, ?)", in_user_id, in_price, in_category_id, in_items_name, metadata);
 
         return "test";
     }
@@ -154,4 +154,11 @@ public class KreasDAO {
         return "done";
     }
 
+    public List<Map<String, Object>> getRecommendation(){
+        String recommendationList = "select items_id, user_id_seller  as \"user_id\", items_name, price, '4.5' as \"rating_value\", sold_amount, metadata  from items order by random() limit 4\n";
+        List<Map<String, Object>> listItem = jdbcTemplate.queryForList(recommendationList);
+        System.out.println(listItem);
+
+        return listItem;
+    }
   }

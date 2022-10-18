@@ -42,16 +42,18 @@ export class DisplayBuilderComponent implements OnInit {
 
     this.scene.add(this.ShapesService.group);
 
-    this.control.cameraControl();
-    this.control.shapesControl();
-    this.control.topperControl();
-
-    document.body.appendChild(this.renderer.domElement);
-    this.render();
-
     //save scene as JSON
     const serializedScene = JSON.stringify(this.scene.toJSON());
     console.log(serializedScene);
+
+    this.control.savingControl(serializedScene);
+    this.control.cameraControl();
+    this.control.shapesControl(serializedScene);
+    this.control.topperControl();
+
+    var canvas = document.querySelector('#body');
+    canvas!.appendChild(this.renderer.domElement);
+    this.render();
 
     //load json scene
     // const scene = new THREE.ObjectLoader().parse(JSON.parse(serializedScene));
