@@ -24,14 +24,13 @@ export class ControlService {
   cakeShapes = {
     shape: 'Cube',
   };
-  savingControl(metadata: any) {
+  savingControl() {
     var saving = {
       metadata: () => {
-        console.log(metadata);
-
         var detailsAdd: product = JSON.parse(
           sessionStorage.getItem('detailsAddItem') || ''
         );
+        var metadata = sessionStorage.getItem('sceneJson');
         this.seller
           .addItems(
             detailsAdd.itemsName,
@@ -82,7 +81,7 @@ export class ControlService {
       .name('Rotate Z');
   }
 
-  shapesControl(metadata: any) {
+  shapesControl() {
     const params = {
       color: 0xfffff,
     };
@@ -92,9 +91,9 @@ export class ControlService {
         this.gui.destroy();
         this.gui = new dat.GUI();
 
-        this.savingControl(metadata);
+        this.savingControl();
         this.cameraControl();
-        this.shapesControl(metadata);
+        this.shapesControl();
         this.topperControl();
         this.ShapesService.cake(this.cakeShapes.shape);
       },

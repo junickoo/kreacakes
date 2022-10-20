@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ItemCheckoutService } from './../../service/item-checkout.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-page.component.css'],
 })
 export class ItemPageComponent implements OnInit {
-  constructor(private itemCheckoutService: ItemCheckoutService) {}
+  constructor(
+    private itemCheckoutService: ItemCheckoutService,
+    private router: Router
+  ) {}
   details = JSON.parse(sessionStorage.getItem('itemDetails') || '{}');
   ngOnInit(): void {
     console.log(this.details);
@@ -34,5 +38,8 @@ export class ItemPageComponent implements OnInit {
     } else {
       alert('Failed to add items to cart');
     }
+  }
+  productDisp() {
+    this.router.navigateByUrl('display-view');
   }
 }

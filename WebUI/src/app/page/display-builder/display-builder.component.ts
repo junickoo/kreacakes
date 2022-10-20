@@ -28,6 +28,8 @@ export class DisplayBuilderComponent implements OnInit {
   cakeShapes = {
     shape: 'Cube',
   };
+
+  serializedScene: any;
   ngOnInit(): void {
     this.renderer = new WebGLRenderer();
 
@@ -43,12 +45,10 @@ export class DisplayBuilderComponent implements OnInit {
     this.scene.add(this.ShapesService.group);
 
     //save scene as JSON
-    const serializedScene = JSON.stringify(this.scene.toJSON());
-    console.log(serializedScene);
 
-    this.control.savingControl(serializedScene);
+    this.control.savingControl();
     this.control.cameraControl();
-    this.control.shapesControl(serializedScene);
+    this.control.shapesControl();
     this.control.topperControl();
 
     var canvas = document.querySelector('#body');
@@ -64,6 +64,10 @@ export class DisplayBuilderComponent implements OnInit {
     //    object.material.opacity = control.opacity;
 
     // }
+    this.serializedScene = JSON.stringify(this.scene.toJSON());
+    sessionStorage.setItem('sceneJson', this.serializedScene);
+    console.log(this.scene.toJSON());
+
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
   }

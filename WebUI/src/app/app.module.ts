@@ -22,6 +22,7 @@ import { AddItemPageComponent } from './page/add-item-page/add-item-page.compone
 import { DialogOverviewComponent } from './layout/dialog-overview/dialog-overview.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DisplayBuilderComponent } from './page/display-builder/display-builder.component';
+import { DisplayCustComponent } from './page/display-cust/display-cust.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DisplayBuilderComponent } from './page/display-builder/display-builder.
     AddItemPageComponent,
     DialogOverviewComponent,
     DisplayBuilderComponent,
+    DisplayCustComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,12 @@ import { DisplayBuilderComponent } from './page/display-builder/display-builder.
           component: DisplayBuilderComponent,
           canActivate: [AuthGuard],
         },
+        {
+          path: 'display-view',
+          component: DisplayCustComponent,
+          canActivate: [AuthGuard],
+        },
+
         {
           path: 'homepage',
           component: HomepageComponent,
