@@ -155,7 +155,7 @@ public class KreasDAO {
     }
 
     public List<Map<String, Object>> getRecommendation(){
-        String recommendationList = "select items_id, user_id_seller  as \"user_id\", items_name, price, '4.5' as \"rating_value\", sold_amount, metadata  from items order by random() limit 4\n";
+        String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, it.metadata, a.username  from items it inner join account a on it.user_id_seller = a.user_id  order by random() limit 4\n";
         List<Map<String, Object>> listItem = jdbcTemplate.queryForList(recommendationList);
         System.out.println(listItem);
 

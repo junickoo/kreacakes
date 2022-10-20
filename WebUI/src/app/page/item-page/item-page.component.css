@@ -83,7 +83,7 @@
   width: 20em;
 }
 .item-button-component > p {
-  margin: 0;
+  margin: 10px 0px;
   font-size: 1.5em;
   font-weight: 700;
   color: #4a6163;
@@ -92,7 +92,7 @@
 .quantity-btn {
   display: flex;
   width: 8em;
-  margin: 0px 0px 10px 0px;
+  margin: 10px 0px;
 }
 .quantity-min,
 .quantity-plus {

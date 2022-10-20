@@ -1,3 +1,5 @@
+import { DialogOverviewComponent } from './../../layout/dialog-overview/dialog-overview.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ItemCheckoutService } from './../../service/item-checkout.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 export class ItemPageComponent implements OnInit {
   constructor(
     private itemCheckoutService: ItemCheckoutService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
   details = JSON.parse(sessionStorage.getItem('itemDetails') || '{}');
   ngOnInit(): void {
@@ -34,9 +37,29 @@ export class ItemPageComponent implements OnInit {
   }
   validateCart(response: any) {
     if (response.status == 200) {
-      alert('Items added to cart!');
+      const dialogRef = this.dialog.open(DialogOverviewComponent, {
+        width: '250px',
+        data: {
+          type: 'login',
+          message: 'Items added to cart!',
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        window.location.reload();
+      });
     } else {
-      alert('Failed to add items to cart');
+      const dialogRef = this.dialog.open(DialogOverviewComponent, {
+        width: '250px',
+        data: {
+          type: 'login',
+          message: 'Items failed to add!',
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        window.location.reload();
+      });
     }
   }
   productDisp() {

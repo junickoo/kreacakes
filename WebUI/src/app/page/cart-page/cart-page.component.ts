@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { ItemCheckoutService } from './../../service/item-checkout.service';
 import {
   Component,
@@ -5,6 +6,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
+import { DialogOverviewComponent } from 'src/app/layout/dialog-overview/dialog-overview.component';
 
 @Component({
   selector: 'app-cart-page',
@@ -17,7 +19,8 @@ export class CartPageComponent implements OnInit {
   grandTotal: any = 0;
   constructor(
     private itemSevice: ItemCheckoutService,
-    private changeDetect: ChangeDetectorRef
+    private changeDetect: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -56,5 +59,16 @@ export class CartPageComponent implements OnInit {
   payCart() {
     let userId = sessionStorage.getItem('user_id');
     this.itemSevice.payCart(userId).subscribe((data) => console.log(data));
+    const dialogRef = this.dialog.open(DialogOverviewComponent, {
+      width: '250px',
+      data: {
+        type: 'login',
+        message: 'Payment Success!',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      window.location.reload();
+    });
   }
 }

@@ -22,7 +22,7 @@ export class ControlService {
   ) {}
   gui = new dat.GUI();
   cakeShapes = {
-    shape: 'Cube',
+    shape: 'cube',
   };
   savingControl() {
     var saving = {
@@ -101,12 +101,10 @@ export class ControlService {
     folder.addColor(params, 'color').onChange(() => {
       this.ShapesService.material.color.set(params.color);
     });
-    folder
-      .add(this.cakeShapes, 'shape', {
-        Cube: 'cube',
-        Cyllinder: 'cyllinder',
-      })
-      .setValue('cube');
+    folder.add(this.cakeShapes, 'shape', {
+      Cube: 'cube',
+      Cyllinder: 'cyllinder',
+    });
     folder.add(generate, 'generateShape');
   }
 
@@ -196,7 +194,13 @@ export class ControlService {
     cherry = new THREE.Mesh(sphere, cherryMaterial);
     this.count.cherry++;
 
-    cherry.position.y = 2.5;
+    if (this.cakeShapes.shape == 'cube') {
+      cherry.position.y = 2.5;
+    } else if (this.cakeShapes.shape == 'cyllinder') {
+      cherry.position.y = 2.97;
+    } else {
+      cherry.position.y = 2.5;
+    }
 
     const topControl = this.gui.addFolder('cherry ' + this.count.cherry);
 

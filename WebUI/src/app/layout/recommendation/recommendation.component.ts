@@ -85,4 +85,5 @@ type product = {
   rating_value: number;
   sold_amount: number;
   metadata: string;
+  username: string;
 };
