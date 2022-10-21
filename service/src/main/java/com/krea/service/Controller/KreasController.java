@@ -252,6 +252,11 @@ public class KreasController{
         outputParameter.put("message", output);
         outputParameter.put("status", "200");
 
+        String testingSplit = "elvin ganteng banget";
+        String[] elvinGanteng = testingSplit.split(" ");
+
+        System.out.println(elvinGanteng.length);
+
         return outputParameter;
     }
 }

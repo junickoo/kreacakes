@@ -1,3 +1,4 @@
+import { DialogOverviewComponent } from './../../layout/dialog-overview/dialog-overview.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/service/login-service.service';
@@ -38,5 +39,18 @@ export class LoginPageComponent implements OnInit {
   }
   test() {
     console.log('TEST');
+  }
+  forgetPass() {
+    const dialogRef = this.dialog.open(DialogOverviewComponent, {
+      width: '250px',
+      data: {
+        type: 'login',
+        message: 'Makannya jangan lupa! *kata elvin',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      window.location.reload();
+    });
   }
 }
