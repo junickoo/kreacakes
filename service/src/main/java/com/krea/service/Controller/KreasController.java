@@ -252,11 +252,17 @@ public class KreasController{
         outputParameter.put("message", output);
         outputParameter.put("status", "200");
 
-        String testingSplit = "elvin ganteng banget";
-        String[] elvinGanteng = testingSplit.split(" ");
+        return outputParameter;
+    }
 
-        System.out.println(elvinGanteng.length);
+    @PostMapping(path = "/get-search")
+    public Map<String, Object> getSearch(@RequestBody Search search){
+        List<Map<String, Object>> output = kreasDAO.getSearch(search.getQuery());
+        outputParameter.put("message", output);
+        outputParameter.put("status", "200");
 
         return outputParameter;
     }
+
+
 }

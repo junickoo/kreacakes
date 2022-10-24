@@ -161,4 +161,13 @@ public class KreasDAO {
 
         return listItem;
     }
-  }
+
+    public List<Map<String, Object>> getSearch(String search_query){
+        String searchList = "select i.items_id, i.user_id_seller  as \"user_id\", i.items_name, i.price, '4.5' as \"rating_value\", i.sold_amount, i.metadata, a.username from items i inner join category c on c.category_id = i.category_id inner join account a ON a.user_id = i.user_id_seller  where lower(i.items_name) like lower('%" + search_query + "%') or lower(c.category_name) like lower('%" + search_query + "%') or lower(a.username) like lower('%" + search_query + "%')";
+        List<Map<String, Object>> searchItem = jdbcTemplate.queryForList(searchList);
+        System.out.println(searchItem);
+
+        return searchItem;
+    }
+
+}

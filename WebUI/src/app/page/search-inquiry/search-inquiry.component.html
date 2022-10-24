@@ -1,0 +1,16 @@
+<app-navigation-bar></app-navigation-bar>
+<div style="display: grid; height: fit-content">
+  <h1 style="margin: 2em auto">Search Result :</h1>
+  <div
+    style="
+      display: grid;
+      margin: 2em auto;
+      grid-template-columns: repeat(4, 250px);
+      gap: 25px;
+    "
+  >
+    <ng-container *ngFor="let a of dataSource">
+      <app-card [productsDetail]="a" (click)="itemsCard(a)"></app-card>
+    </ng-container>
+  </div>
+</div>

@@ -23,6 +23,7 @@ import { DialogOverviewComponent } from './layout/dialog-overview/dialog-overvie
 import { MatDialogModule } from '@angular/material/dialog';
 import { DisplayBuilderComponent } from './page/display-builder/display-builder.component';
 import { DisplayCustComponent } from './page/display-cust/display-cust.component';
+import { SearchInquiryComponent } from './page/search-inquiry/search-inquiry.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DisplayCustComponent } from './page/display-cust/display-cust.component
     DialogOverviewComponent,
     DisplayBuilderComponent,
     DisplayCustComponent,
+    SearchInquiryComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,11 @@ import { DisplayCustComponent } from './page/display-cust/display-cust.component
         {
           path: 'seller',
           component: SellerPageComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'search-inquiry',
+          component: SearchInquiryComponent,
           canActivate: [AuthGuard],
         },
         {

@@ -13,10 +13,11 @@
       <img src="/assets/icon/KreaLogo.png" style="height: 2em" alt="" />
     </div>
     <div class="search" style="flex: 6">
-      <input type="text" /><img
+      <input type="text" #search name="search" /><img
         src="/assets/icon/SearchIcon.png"
         class="btn-icon"
         alt=""
+        (click)="searchQuery(search)"
       />
     </div>
     <div class="icon btn-icon">
