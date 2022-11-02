@@ -15,7 +15,11 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate() {
-    if (sessionStorage.getItem('isLogin') == 'true') {
+    if (
+      sessionStorage.getItem('isLogin') == 'true' ||
+      window.location.host == 'app.sandbox.midtrans.com'
+    ) {
+      console.log(window.location.host);
       return true;
     } else {
       const dialogRef = this.dialog.open(DialogOverviewComponent, {

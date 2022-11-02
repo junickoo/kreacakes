@@ -36,8 +36,11 @@ export class ItemCheckoutService {
     });
   }
 
-  snapApi() {
-    return this.http.post(ApiUrl.snapAPi, {});
+  snapApi(amount: any, id: any) {
+    return this.http.post(ApiUrl.snapAPi, {
+      gross_amount: amount,
+      order_id: id,
+    });
   }
 }
 // {
