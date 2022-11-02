@@ -83,7 +83,7 @@ export class ControlService {
 
   shapesControl() {
     const params = {
-      color: 0xfffff,
+      color: 0xffffff,
     };
     const folder = this.gui.addFolder('Shapes');
     var generate = {
@@ -98,13 +98,48 @@ export class ControlService {
         this.ShapesService.cake(this.cakeShapes.shape);
       },
     };
+
     folder.addColor(params, 'color').onChange(() => {
       this.ShapesService.material.color.set(params.color);
     });
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+    // var inputFile = {
+    //   inputFile: () => {
+    //     var inputImg = document.getElementById('image-file');
+    //     inputImg?.click();
+    //     inputImg?
+    //   },
+    // };
+    // texture.add(inputFile, 'inputFile').name('Image Depan');
+    folder
+      .add(this.cakeShapes, 'shape', {
+        Cube: 'cube',
+        Cyllinder: 'cyllinder',
+      })
+      .onChange((e) => {
+        console.log(e.value);
+        // console.log(this.cakeShapes.shape);
+        // if (this.cakeShapes.shape == 'cube') {
+        //   texture.remove(texture.__controllers[0]);
+        //   texture.add(inputFile, 'inputFile').name('Image Depan');
+        // } else if (this.cakeShapes.shape == 'cyllinder') {
+        //   texture.remove(texture.__controllers[0]);
+        //   texture.add(inputFile, 'inputFile').name('Image Cyll');
+        // }
+      });
+=======
+>>>>>>> Stashed changes
     folder.add(this.cakeShapes, 'shape', {
       Cube: 'cube',
       Cyllinder: 'cyllinder',
     });
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2df8a7c9b09190ca96e5cfd7e4d715137db8edce
+>>>>>>> Stashed changes
     folder.add(generate, 'generateShape');
   }
 

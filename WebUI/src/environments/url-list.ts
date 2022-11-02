@@ -22,4 +22,11 @@ export class ApiUrl {
   public static readonly getRecommendation =
     'http://localhost:8080/kreas/get-recommendation';
   public static readonly getSearch = 'http://localhost:8080/kreas/get-search';
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+  public static readonly snapPayment = 'http://localhost:3000';
+=======
+>>>>>>> 2df8a7c9b09190ca96e5cfd7e4d715137db8edce
+>>>>>>> Stashed changes
 }

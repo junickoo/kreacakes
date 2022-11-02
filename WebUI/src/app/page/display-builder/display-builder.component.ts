@@ -66,9 +66,33 @@ export class DisplayBuilderComponent implements OnInit {
     // }
     this.serializedScene = JSON.stringify(this.scene.toJSON());
     sessionStorage.setItem('sceneJson', this.serializedScene);
+<<<<<<< Updated upstream
     console.log(this.scene.toJSON());
+=======
+<<<<<<< HEAD
+    // console.log(this.scene.toJSON());
+=======
+    console.log(this.scene.toJSON());
+>>>>>>> 2df8a7c9b09190ca96e5cfd7e4d715137db8edce
+>>>>>>> Stashed changes
 
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
+  }
+
+  frontImg(event: any) {
+    this.ShapesService.frontUpload(event);
+  }
+
+  backImg(event: any) {
+    this.ShapesService.backUpload(event);
+  }
+
+  leftImg(event: any) {
+    this.ShapesService.leftUpload(event);
+  }
+
+  rightImg(event: any) {
+    this.ShapesService.rightUpload(event);
   }
 }
