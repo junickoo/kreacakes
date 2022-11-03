@@ -61,17 +61,11 @@ import { SearchInquiryComponent } from './page/search-inquiry/search-inquiry.com
         },
 
         {
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
           path: 'payment-success',
           component: DialogOverviewComponent,
           canActivate: [AuthGuard],
         },
         {
-=======
->>>>>>> 2df8a7c9b09190ca96e5cfd7e4d715137db8edce
->>>>>>> Stashed changes
           path: 'homepage',
           component: HomepageComponent,
           canActivate: [AuthGuard],

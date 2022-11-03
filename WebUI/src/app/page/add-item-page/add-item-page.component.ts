@@ -13,6 +13,7 @@ import { DialogOverviewComponent } from 'src/app/layout/dialog-overview/dialog-o
 export class AddItemPageComponent implements OnInit {
   pageConfig: any;
   categoryList: any;
+  minValue = 1000;
   constructor(
     private http: HttpClient,
     private seller: SellerServiceService,
@@ -68,36 +69,71 @@ export class AddItemPageComponent implements OnInit {
       category: category.value,
       itemsName: name.value,
     };
-    sessionStorage.setItem('detailsAddItem', JSON.stringify(detailsAddItem));
-    this.Router.navigateByUrl('/display-builder');
+    if (price.value > 999) {
+      sessionStorage.setItem('detailsAddItem', JSON.stringify(detailsAddItem));
+      this.Router.navigateByUrl('/display-builder');
+    } else {
+      const dialogRef = this.dialog.open(DialogOverviewComponent, {
+        width: '200px',
+        height: '200px',
+        data: {
+          type: 'message-only',
+          message: 'Price Minimum Rp. 1.000,-',
+        },
+        panelClass: 'myClass',
+      });
+
+      dialogRef.afterOpened().subscribe(() =>
+        setTimeout(() => {
+          dialogRef.close();
+        }, 1500)
+      );
+    }
   }
   editItem(name: any, category: any, price: any) {
     let items_id = this.object.items_id;
-    this.seller
-      .editItems(items_id, name.value, category.value, price.value)
-      .subscribe((data: any) => {
-        if (data.status == '200') {
-          const dialogRef = this.dialog.open(DialogOverviewComponent, {
-            width: '200px',
-            height: '200px',
-            data: {
-              type: 'message-only',
-              message: 'Items Edited!',
-            },
-            panelClass: 'myClass',
-          });
+    if (price.value > 999) {
+      this.seller
+        .editItems(items_id, name.value, category.value, price.value)
+        .subscribe((data: any) => {
+          if (data.status == '200') {
+            const dialogRef = this.dialog.open(DialogOverviewComponent, {
+              width: '200px',
+              height: '200px',
+              data: {
+                type: 'message-only',
+                message: 'Items Edited!',
+              },
+              panelClass: 'myClass',
+            });
 
-          dialogRef.afterOpened().subscribe(() =>
-            setTimeout(() => {
-              dialogRef.close();
-            }, 1500)
-          );
-
-          dialogRef.afterClosed().subscribe((result) => {
-            this.Router.navigateByUrl('/seller');
-          });
-        }
+            dialogRef.afterOpened().subscribe(() =>
+              setTimeout(() => {
+                dialogRef.close();
+              }, 1500)
+            );
+            dialogRef.afterClosed().subscribe((result) => {
+              this.Router.navigateByUrl('/seller');
+            });
+          }
+        });
+    } else {
+      const dialogRef = this.dialog.open(DialogOverviewComponent, {
+        width: '200px',
+        height: '200px',
+        data: {
+          type: 'message-only',
+          message: 'Price Minimum Rp. 1.000,-',
+        },
+        panelClass: 'myClass',
       });
+
+      dialogRef.afterOpened().subscribe(() =>
+        setTimeout(() => {
+          dialogRef.close();
+        }, 1500)
+      );
+    }
   }
 }
 

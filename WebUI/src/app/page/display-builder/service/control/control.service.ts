@@ -102,9 +102,6 @@ export class ControlService {
     folder.addColor(params, 'color').onChange(() => {
       this.ShapesService.material.color.set(params.color);
     });
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 
     // var inputFile = {
     //   inputFile: () => {
@@ -130,16 +127,6 @@ export class ControlService {
         //   texture.add(inputFile, 'inputFile').name('Image Cyll');
         // }
       });
-=======
->>>>>>> Stashed changes
-    folder.add(this.cakeShapes, 'shape', {
-      Cube: 'cube',
-      Cyllinder: 'cyllinder',
-    });
-<<<<<<< Updated upstream
-=======
->>>>>>> 2df8a7c9b09190ca96e5cfd7e4d715137db8edce
->>>>>>> Stashed changes
     folder.add(generate, 'generateShape');
   }
 

@@ -44,12 +44,13 @@
         <div class="input-form">
           <p>Price</p>
           <input
-            type="price"
+            type="number"
             class="px-3"
             id="price"
             #price
             name="price"
-            [value]="pageConfig == '#/edit-item' ? object.price : ''"
+            [value]="pageConfig == '#/edit-item' ? object.price : 10000"
+            [min]="minValue"
           />
         </div>
       </div>
