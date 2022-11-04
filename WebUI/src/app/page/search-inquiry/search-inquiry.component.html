@@ -1,6 +1,13 @@
 <app-navigation-bar></app-navigation-bar>
 <div style="display: grid; height: fit-content">
-  <h1 style="margin: 2em auto">Search Result :</h1>
+  <h1 style="margin: 1em auto">Search Result :</h1>
+  <ng-container *ngIf="dataSource.length < 1">
+    <h1 style="margin: auto">
+      We are sorry but there are no result for your search "{{ searchQuery }} "
+    </h1>
+    <h1 style="margin: 1em auto">Check for our other items :</h1>
+    <app-recommendation></app-recommendation>
+  </ng-container>
   <div
     style="
       display: grid;

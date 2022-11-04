@@ -10,7 +10,9 @@ export class SearchInquiryComponent implements OnInit {
   constructor(private Router: Router) {}
 
   dataSource: any;
+  searchQuery: any;
   ngOnInit(): void {
+    this.searchQuery = sessionStorage.getItem('search_query' || '');
     this.dataSource = JSON.parse(
       sessionStorage.getItem('search_inquiry') || ''
     );

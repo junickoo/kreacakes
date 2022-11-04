@@ -25,6 +25,7 @@ export class NavigationBarComponent implements OnInit {
       .subscribe((resp: any) => {
         console.log(resp);
         sessionStorage.setItem('search_inquiry', JSON.stringify(resp.message));
+        sessionStorage.setItem('search_query', query.value);
       });
     console.log(query.value);
 

@@ -101,53 +101,45 @@ public class KreasController{
     @PostMapping(path = "/insert-items")
     public Map<String,Object> insItems(@RequestBody Items items){
 
-        kreasDAO.insertItem(items.getUserId(), items.getPrice(), items.getCategory(), items.getItemsName(), items.getMetadata());
+        Map<String, Object> output = kreasDAO.insertItem(items.getUserId(), items.getPrice(), items.getCategory(), items.getItemsName(), items.getMetadata());
 
-        outputParameter.put("message", "Items Added");
-        outputParameter.put("status", "200");
-
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
     @PostMapping(path = "/delete-items")
     public Map<String, Object> deleteItems(@RequestBody DeleteItems deleteItems){
 
-        kreasDAO.deleteItem(deleteItems.getItemsId(), deleteItems.getUserId());
+        Map<String, Object> output = kreasDAO.deleteItem(deleteItems.getItemsId(), deleteItems.getUserId());
 
-        outputParameter.put("message", "Items Deleted");
-        outputParameter.put("status", "200");
-
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
     @PutMapping(path = "/send-item")
     public Map<String, Object> sendItem(@RequestBody CartItemsSend cartItemsSend){
-        String output = kreasDAO.sendItem(cartItemsSend.getCart_items_id());
+        Map<String, Object> output = kreasDAO.sendItem(cartItemsSend.getCart_items_id());
 
 
-        outputParameter.put("message", output);
-        outputParameter.put("status", "200");
-
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
     @PostMapping(path = "/edit-items")
     public Map<String, Object> editItems(@RequestBody editItem editItem){
 
-        kreasDAO.editItem(editItem.getItems_id(),editItem.getItems_name(),editItem.getPrice(),editItem.getCategory());
+        Map<String, Object> output = kreasDAO.editItem(editItem.getItems_id(),editItem.getItems_name(),editItem.getPrice(),editItem.getCategory());
 
-        outputParameter.put("message", "Items Edited");
-        outputParameter.put("status", "200");
 
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
     @PostMapping(path = "/insert-cart-item")
     public Map<String, Object> insertCartItems(@RequestBody InsertCartItems insertCartItems){
 
-        kreasDAO.insertItemCart(insertCartItems.getUserId(), insertCartItems.getItemsId(), insertCartItems.getQuantity());
-        outputParameter.put("message", "Insert Success");
-        outputParameter.put("status", "200");
+        Map<String, Object> output = kreasDAO.insertItemCart(insertCartItems.getUserId(), insertCartItems.getItemsId(), insertCartItems.getQuantity());
 
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
@@ -155,14 +147,17 @@ public class KreasController{
     public Map<String, Object> clearCart(@RequestBody ClearCart clearCart){
 
         Map<String, Object> checkCart = kreasDAO.checkCart(clearCart.getUserId());
+        Map<String, Object> errorMessage = new HashMap<>();
         if(checkCart.get("returnvalue").toString() == "true"){
             kreasDAO.clearCart(clearCart.getUserId());
-            outputParameter.put("message", "Cart Cleared");
-            outputParameter.put("status", "200");
+            errorMessage.put("message", "Cart Cleared");
+            errorMessage.put("status", "200");
+            outputParameter.put("error_schema", errorMessage);
         }
         else {
-            outputParameter.put("message", "Cart Empty");
-            outputParameter.put("status", "400");
+            errorMessage.put("message", "Cart Empty");
+            errorMessage.put("status", "400");
+            outputParameter.put("error_schema", errorMessage);
         }
 
         return outputParameter;
@@ -171,15 +166,18 @@ public class KreasController{
     @PutMapping(path = "/pay-cart")
     public Map<String, Object> payCart(@RequestBody PayCart payCart){
         Map<String, Object> checkCart = kreasDAO.checkCart(payCart.getUserId());
+        Map<String, Object> errorMessage = new HashMap<>();
 
         if(checkCart.get("returnvalue").toString() == "true"){
             kreasDAO.payCart(payCart.getUserId());
-            outputParameter.put("message", "Cart Paid");
-            outputParameter.put("status", "200");
+            errorMessage.put("message", "Cart Paid");
+            errorMessage.put("status", "200");
+            outputParameter.put("error_schema", errorMessage);
         }
         else{
-            outputParameter.put("message", "Cart Empty");
-            outputParameter.put("status", "400");
+            errorMessage.put("message", "Cart Empty");
+            errorMessage.put("status", "400");
+            outputParameter.put("error_schema", errorMessage);
         }
 
         return outputParameter;
@@ -188,15 +186,20 @@ public class KreasController{
     @PostMapping(path = "/get-cart-items")
     public Map<String, Object> getCartItems(@RequestBody CartItems cartItems){
         List<Map<String, Object>> output = kreasDAO.getCartItems(cartItems.getUserId());
+        Map<String, Object> errorMessage = new HashMap<>();
 
         if(output != null){
 //            kreasDAO.payCart(payCart.getUserId());
             outputParameter.put("message", output);
-            outputParameter.put("status", "200");
+            errorMessage.put("status","200");
+            errorMessage.put("message", "success");
+            outputParameter.put("error_schema", errorMessage);
         }
         else{
             outputParameter.put("message", "Null");
-            outputParameter.put("status", "400");
+            errorMessage.put("status","400");
+            errorMessage.put("message", "success");
+            outputParameter.put("error_schema", errorMessage);
         }
 
         return outputParameter;
@@ -206,15 +209,20 @@ public class KreasController{
     public Map<String, Object> deleteCartItems(@RequestBody CartItemsDelete cartItemsDelete){
         String output = kreasDAO.deleteCartItems(cartItemsDelete.getCartItemsId());
         List<Map<String, Object>> outputMessage = kreasDAO.getCartItems(cartItemsDelete.getUserId());
+        Map<String, Object> errorMessage = new HashMap<>();
 
         if(outputMessage != null){
 //            kreasDAO.payCart(payCart.getUserId());
             outputParameter.put("message", outputMessage);
-            outputParameter.put("status", "200");
+            errorMessage.put("status","200");
+            errorMessage.put("message", "success");
+            outputParameter.put("error_schema", errorMessage);
         }
         else{
             outputParameter.put("message", "Null");
-            outputParameter.put("status", "400");
+            errorMessage.put("status","400");
+            errorMessage.put("message", "success");
+            outputParameter.put("error_schema", errorMessage);
         }
 
         return outputParameter;
@@ -224,43 +232,42 @@ public class KreasController{
 
     @PostMapping(path = "/get-item-seller")
     public Map<String, Object> getItemSeller(@RequestBody PayCart payCart){
-        List<Map<String, Object>> output = kreasDAO.getItemSeller(payCart.getUserId());
-        outputParameter.put("message", output);
-        outputParameter.put("status", "400");
+        Map<String, Object> output = kreasDAO.getItemSeller(payCart.getUserId());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
     @GetMapping(path ="/get-category")
     public Map<String, Object> getCategory(){
-        List<Map<String, Object>> output = kreasDAO.getCategory();
-        outputParameter.put("message", output);
-        outputParameter.put("status", "200");
+        Map<String, Object> output = kreasDAO.getCategory();
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
     @PostMapping(path ="/get-order")
     public Map<String, Object> getOrder(@RequestBody ClearCart clearCart){
-        List<Map<String, Object>> output = kreasDAO.getOrderList(clearCart.getUserId());
-        outputParameter.put("message", output);
-        outputParameter.put("status", "200");
+        Map<String, Object> output = kreasDAO.getOrderList(clearCart.getUserId());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
     @GetMapping(path = "/get-recommendation")
     public Map<String, Object> getRecommendation(){
-        List<Map<String, Object>> output = kreasDAO.getRecommendation();
-        outputParameter.put("message", output);
-        outputParameter.put("status", "200");
+        Map<String, Object> output = kreasDAO.getRecommendation();
+        outputParameter.put("message", output.get("value"));
+        outputParameter.put("status", output.get("error_message"));
 
         return outputParameter;
     }
 
     @PostMapping(path = "/get-search")
     public Map<String, Object> getSearch(@RequestBody Search search){
-        List<Map<String, Object>> output = kreasDAO.getSearch(search.getQuery());
-        outputParameter.put("message", output);
-        outputParameter.put("status", "200");
-
+        Map<String, Object> output = kreasDAO.getSearch(search.getQuery());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
     }
 
