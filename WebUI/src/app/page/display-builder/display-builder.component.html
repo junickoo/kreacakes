@@ -14,4 +14,10 @@
   <label for="image-file">Mid Image : </label>
   <input id="image-file" (change)="midImg($event)" type="file" #imageFile />
 </div>
+<div class="file-upload" *ngIf="this.shapes == 'cookies'">
+  <label for="image-file">Top Image : </label>
+  <input id="image-file" (change)="cookiesTop($event)" type="file" #imageFile />
+  <label for="image-file">Botom Image : </label>
+  <input id="image-file" (change)="cookiesBot($event)" type="file" #imageFile />
+</div>
 <body id="body"></body>

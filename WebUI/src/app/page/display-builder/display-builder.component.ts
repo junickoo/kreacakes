@@ -96,4 +96,10 @@ export class DisplayBuilderComponent implements OnInit {
   midImg(event: any) {
     this.ShapesService.middleUpload(event);
   }
+  cookiesTop(event: any) {
+    this.ShapesService.cookiesTopUp(event);
+  }
+  cookiesBot(event: any) {
+    this.ShapesService.cookiesBotUp(event);
+  }
 }

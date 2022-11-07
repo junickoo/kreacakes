@@ -18,6 +18,9 @@ export class ShapesService {
       case 'cyllinder':
         this.cyllinder();
         break;
+      case 'cookies':
+        this.cookiesGen();
+        break;
     }
   }
   sourceFile: any = {
@@ -88,6 +91,30 @@ export class ShapesService {
     const file = imageFile.target.files[0];
 
     reader.onload = (e) => (this.cylSource.middle = reader.result);
+
+    reader.readAsDataURL(file);
+    // formData.append('photo', photo);
+    // fetch('/upload/image', { method: 'POST', body: formData });
+  }
+  cookies: any = {
+    top: '',
+    bot: '',
+  };
+  cookiesTopUp(imageFile: any) {
+    var reader = new FileReader();
+    const file = imageFile.target.files[0];
+
+    reader.onload = (e) => (this.cookies.top = reader.result);
+
+    reader.readAsDataURL(file);
+    // formData.append('photo', photo);
+    // fetch('/upload/image', { method: 'POST', body: formData });
+  }
+  cookiesBotUp(imageFile: any) {
+    var reader = new FileReader();
+    const file = imageFile.target.files[0];
+
+    reader.onload = (e) => (this.cookies.bot = reader.result);
 
     reader.readAsDataURL(file);
     // formData.append('photo', photo);
@@ -178,6 +205,40 @@ export class ShapesService {
       cylMaterialArray.push(
         new THREE.MeshBasicMaterial({
           map: topTexture,
+        })
+      );
+    }
+
+    var cyllinder = new THREE.Mesh(cylGeometry, cylMaterialArray);
+
+    this.group.children = [];
+
+    this.group.add(cyllinder);
+  }
+
+  cookiesGen() {
+    var cylGeometry = new THREE.CylinderGeometry(5, 5, 0.1, 32);
+    var topTexture = new THREE.TextureLoader().load(this.cookies.top);
+    var botTexture = new THREE.TextureLoader().load(this.cookies.bot);
+
+    console.log(this.cylSource.top);
+    var cylMaterialArray = [];
+    cylMaterialArray.push(new THREE.MeshBasicMaterial({ color: 'black' }));
+    if (this.cookies.top == '') {
+      cylMaterialArray.push(this.material);
+    } else {
+      cylMaterialArray.push(
+        new THREE.MeshBasicMaterial({
+          map: topTexture,
+        })
+      );
+    }
+    if (this.cookies.bot == '') {
+      cylMaterialArray.push(this.material);
+    } else {
+      cylMaterialArray.push(
+        new THREE.MeshBasicMaterial({
+          map: botTexture,
         })
       );
     }

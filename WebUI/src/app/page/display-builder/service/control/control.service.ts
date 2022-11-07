@@ -22,7 +22,11 @@ export class ControlService {
   ) {}
   gui = new dat.GUI();
   cakeShapes = {
-    shape: 'cube',
+    shape: '',
+  };
+  shapes = {
+    Cube: 'cube',
+    Cyllinder: 'cyllinder',
   };
   savingControl() {
     var saving = {
@@ -114,12 +118,12 @@ export class ControlService {
     //   },
     // };
     // texture.add(inputFile, 'inputFile').name('Image Depan');
-    folder
-      .add(this.cakeShapes, 'shape', {
-        Cube: 'cube',
-        Cyllinder: 'cyllinder',
-      })
-      .onChange((e) => {
+    var detailsItem = JSON.parse(
+      sessionStorage.getItem('detailsAddItem') || ''
+    );
+    if (detailsItem.category == 'cat_2') {
+      this.cakeShapes.shape = 'cube';
+      folder.add(this.cakeShapes, 'shape', this.shapes).onChange((e) => {
         console.log(e.value);
         // console.log(this.cakeShapes.shape);
         // if (this.cakeShapes.shape == 'cube') {
@@ -130,6 +134,9 @@ export class ControlService {
         //   texture.add(inputFile, 'inputFile').name('Image Cyll');
         // }
       });
+    } else if (detailsItem.category == 'cat_1') {
+      this.cakeShapes.shape = 'cookies';
+    }
     folder.add(generate, 'generateShape');
   }
 
