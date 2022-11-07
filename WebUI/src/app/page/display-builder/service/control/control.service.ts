@@ -61,7 +61,9 @@ export class ControlService {
               dialogRef.afterClosed().subscribe((result) => {
                 this.gui.destroy();
                 sessionStorage.setItem('sceneJson', 'test');
-                this.Router.navigateByUrl('/seller');
+                this.Router.navigateByUrl('/seller').then(() =>
+                  window.location.reload()
+                );
               });
             }
           });
