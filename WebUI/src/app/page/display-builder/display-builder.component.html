@@ -1,4 +1,4 @@
-<div class="file-upload">
+<div class="file-upload" *ngIf="this.shapes == 'cube'">
   <label for="image-file">Front Image : </label>
   <input id="image-file" (change)="frontImg($event)" type="file" #imageFile />
   <label for="image-file">Back Image : </label>
@@ -7,5 +7,11 @@
   <input id="image-file" (change)="leftImg($event)" type="file" #imageFile />
   <label for="image-file">Right Image : </label>
   <input id="image-file" (change)="rightImg($event)" type="file" #imageFile />
+</div>
+<div class="file-upload" *ngIf="this.shapes == 'cyllinder'">
+  <label for="image-file">Top Image : </label>
+  <input id="image-file" (change)="topImg($event)" type="file" #imageFile />
+  <label for="image-file">Mid Image : </label>
+  <input id="image-file" (change)="midImg($event)" type="file" #imageFile />
 </div>
 <body id="body"></body>

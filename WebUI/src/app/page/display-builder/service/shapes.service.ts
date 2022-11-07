@@ -66,14 +66,38 @@ export class ShapesService {
     // formData.append('photo', photo);
     // fetch('/upload/image', { method: 'POST', body: formData });
   }
+
+  cylSource: any = {
+    top: '',
+    middle: '',
+  };
+  topUpload(imageFile: any) {
+    var reader = new FileReader();
+    const file = imageFile.target.files[0];
+    console.log(imageFile.target.files[0]);
+
+    reader.onload = (e) => (this.cylSource.top = reader.result);
+
+    reader.readAsDataURL(file);
+    // formData.append('photo', photo);
+    // fetch('/upload/image', { method: 'POST', body: formData });
+  }
+
+  middleUpload(imageFile: any) {
+    var reader = new FileReader();
+    const file = imageFile.target.files[0];
+
+    reader.onload = (e) => (this.cylSource.middle = reader.result);
+
+    reader.readAsDataURL(file);
+    // formData.append('photo', photo);
+    // fetch('/upload/image', { method: 'POST', body: formData });
+  }
   cube() {
     //create cube
     var cubeGeometry = new THREE.BoxGeometry(6, 4, 6);
     var cubeMaterialArray = [];
 
-    var texture: any = new THREE.TextureLoader().load(
-      'assets/graphs/rainbow-cakes.png'
-    );
     var textureDepan = new THREE.TextureLoader().load(this.sourceFile.front);
     var textureBelakang = new THREE.TextureLoader().load(this.sourceFile.back);
     var textureKiri = new THREE.TextureLoader().load(this.sourceFile.left);
@@ -133,14 +157,32 @@ export class ShapesService {
 
   cyllinder() {
     var cylGeometry = new THREE.CylinderGeometry(5, 5, 5, 32);
-    var texture = new THREE.TextureLoader().load(
-      'assets/graphs/rainbow-cakes.png'
-    );
+    var midTexture = new THREE.TextureLoader().load(this.cylSource.middle);
+    var topTexture = new THREE.TextureLoader().load(this.cylSource.top);
 
-    var cyllinder = new THREE.Mesh(
-      cylGeometry,
-      new THREE.MeshBasicMaterial({ map: texture })
-    );
+    console.log(this.cylSource.top);
+    var cylMaterialArray = [];
+
+    if (this.cylSource.middle == '') {
+      cylMaterialArray.push(this.material);
+    } else {
+      cylMaterialArray.push(
+        new THREE.MeshBasicMaterial({
+          map: midTexture,
+        })
+      );
+    }
+    if (this.cylSource.top == '') {
+      cylMaterialArray.push(this.material);
+    } else {
+      cylMaterialArray.push(
+        new THREE.MeshBasicMaterial({
+          map: topTexture,
+        })
+      );
+    }
+
+    var cyllinder = new THREE.Mesh(cylGeometry, cylMaterialArray);
 
     this.group.children = [];
 

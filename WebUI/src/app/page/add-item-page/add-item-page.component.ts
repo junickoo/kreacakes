@@ -71,7 +71,7 @@ export class AddItemPageComponent implements OnInit {
     };
     if (price.value > 999) {
       sessionStorage.setItem('detailsAddItem', JSON.stringify(detailsAddItem));
-      this.Router.navigateByUrl('/display-builder');
+      this.Router.navigateByUrl('display-builder');
     } else {
       const dialogRef = this.dialog.open(DialogOverviewComponent, {
         width: '200px',

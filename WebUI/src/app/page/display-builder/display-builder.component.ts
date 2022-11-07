@@ -18,13 +18,13 @@ export class DisplayBuilderComponent implements OnInit {
     console.log(THREE);
   }
   renderer: any;
-  camera = new THREE.PerspectiveCamera(
+  camera: any = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
-  scene = new THREE.Scene();
+  scene: any = new THREE.Scene();
   cakeShapes = {
     shape: 'Cube',
   };
@@ -58,15 +58,17 @@ export class DisplayBuilderComponent implements OnInit {
     //load json scene
     // const scene = new THREE.ObjectLoader().parse(JSON.parse(serializedScene));
   }
+  shapes: any;
   render() {
+    this.shapes = this.control.cakeShapes.shape;
     // var object = group.getObjectByName('cube');
     // if(object != null){
     //    object.material.opacity = control.opacity;
 
     // }
+    console.log(this.scene.toJSON());
     this.serializedScene = JSON.stringify(this.scene.toJSON());
     sessionStorage.setItem('sceneJson', this.serializedScene);
-    console.log(this.scene.toJSON());
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
   }
@@ -85,5 +87,13 @@ export class DisplayBuilderComponent implements OnInit {
 
   rightImg(event: any) {
     this.ShapesService.rightUpload(event);
+  }
+
+  topImg(event: any) {
+    this.ShapesService.topUpload(event);
+  }
+
+  midImg(event: any) {
+    this.ShapesService.middleUpload(event);
   }
 }
