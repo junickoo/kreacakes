@@ -71,7 +71,7 @@ export class DisplayBuilderComponent implements OnInit {
     //    object.material.opacity = control.opacity;
 
     // }
-    console.log(this.scene.toJSON());
+    console.log(JSON.stringify(this.scene.toJSON()));
     this.serializedScene = JSON.stringify(this.scene.toJSON());
     sessionStorage.setItem('sceneJson', this.serializedScene);
     requestAnimationFrame(this.render.bind(this));
