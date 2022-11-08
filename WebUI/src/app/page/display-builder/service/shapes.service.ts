@@ -217,13 +217,13 @@ export class ShapesService {
   }
 
   cookiesGen() {
-    var cylGeometry = new THREE.CylinderGeometry(5, 5, 0.1, 32);
+    var cylGeometry = new THREE.CylinderGeometry(5, 5, 0.1, 64);
     var topTexture = new THREE.TextureLoader().load(this.cookies.top);
     var botTexture = new THREE.TextureLoader().load(this.cookies.bot);
 
     console.log(this.cylSource.top);
     var cylMaterialArray = [];
-    cylMaterialArray.push(new THREE.MeshBasicMaterial({ color: 'black' }));
+    cylMaterialArray.push(new THREE.MeshBasicMaterial({ color: '#BD8C61' }));
     if (this.cookies.top == '') {
       cylMaterialArray.push(this.material);
     } else {

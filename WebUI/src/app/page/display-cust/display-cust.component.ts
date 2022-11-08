@@ -3,7 +3,7 @@ import { ShapesService } from '../display-builder/service/shapes.service';
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
 import { animate } from '@angular/animations';
-import { Color, WebGLRenderer } from 'three';
+import { Color, WebGLRenderer, TextureLoader } from 'three';
 
 @Component({
   selector: 'app-display-cust',
@@ -70,6 +70,11 @@ export class DisplayCustComponent implements OnInit {
 
     var canvas = document.querySelector('#body');
     canvas!.appendChild(this.renderer.domElement);
+    var backgroundTexture = new TextureLoader().load(
+      'assets/graphs/bakery-background.jpg'
+    );
+
+    this.scene.background = backgroundTexture;
     this.render();
   }
   render() {

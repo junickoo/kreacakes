@@ -122,7 +122,6 @@ export class ControlService {
       sessionStorage.getItem('detailsAddItem') || ''
     );
     if (detailsItem.category == 'cat_2') {
-      this.cakeShapes.shape = 'cube';
       folder.add(this.cakeShapes, 'shape', this.shapes).onChange((e) => {
         console.log(e.value);
         // console.log(this.cakeShapes.shape);

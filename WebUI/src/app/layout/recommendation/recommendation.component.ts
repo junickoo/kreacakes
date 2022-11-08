@@ -49,12 +49,6 @@ export class RecommendationComponent implements OnInit {
       rating_value: 4.5,
       sold_amount: 0,
     };
-    this.productsArray = [
-      this.products1,
-      this.products2,
-      this.products3,
-      this.products4,
-    ];
   }
 
   ngOnInit(): void {
@@ -62,19 +56,46 @@ export class RecommendationComponent implements OnInit {
       .recommendationItems()
       .subscribe((resp) => this.setProductArray(resp));
   }
-
+  prd1 = 0;
+  prd2 = 1;
+  prd3 = 2;
+  prd4 = 3;
   setProductArray(response: any) {
     this.productsArray = response.message;
-    this.products1 = this.productsArray[0];
-    this.products2 = this.productsArray[1];
-    this.products3 = this.productsArray[2];
-    this.products4 = this.productsArray[3];
+    this.products1 = this.productsArray[this.prd1];
+    this.products2 = this.productsArray[this.prd2];
+    this.products3 = this.productsArray[this.prd3];
+    this.products4 = this.productsArray[this.prd4];
     console.log(this.products1.sold_amount);
   }
   itemsCard(details: product) {
     var detailsString = JSON.stringify(details);
     sessionStorage.setItem('itemDetails', detailsString);
     this.Router.navigateByUrl('/item');
+  }
+  rightArrow() {
+    if (this.prd4 != 9) {
+      this.prd1++;
+      this.prd2++;
+      this.prd3++;
+      this.prd4++;
+    }
+    this.products1 = this.productsArray[this.prd1];
+    this.products2 = this.productsArray[this.prd2];
+    this.products3 = this.productsArray[this.prd3];
+    this.products4 = this.productsArray[this.prd4];
+  }
+  leftArrow() {
+    if (this.prd1 != 0) {
+      this.prd1--;
+      this.prd2--;
+      this.prd3--;
+      this.prd4--;
+    }
+    this.products1 = this.productsArray[this.prd1];
+    this.products2 = this.productsArray[this.prd2];
+    this.products3 = this.productsArray[this.prd3];
+    this.products4 = this.productsArray[this.prd4];
   }
 }
 type product = {

@@ -268,7 +268,7 @@ public class KreasDAO {
 
     public Map<String, Object> getRecommendation(){
         try{
-            String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, it.metadata, a.username  from items it inner join account a on it.user_id_seller = a.user_id  order by random() limit 4\n";
+            String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, it.metadata, a.username  from items it inner join account a on it.user_id_seller = a.user_id  order by random() limit 10\n";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(recommendationList);
             System.out.println(listItem);
             Map<String, Object> errorMessage = new HashMap<>();

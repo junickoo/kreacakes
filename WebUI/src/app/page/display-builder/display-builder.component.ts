@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import * as dat from 'dat.gui';
 import { animate } from '@angular/animations';
-import { Color, WebGLRenderer } from 'three';
+import { Color, TextureLoader, WebGLRenderer } from 'three';
 @Component({
   selector: 'app-display-builder',
   templateUrl: './display-builder.component.html',
@@ -43,6 +43,11 @@ export class DisplayBuilderComponent implements OnInit {
     this.camera.lookAt(this.scene.position);
 
     this.scene.add(this.ShapesService.group);
+    var backgroundTexture = new TextureLoader().load(
+      'assets/graphs/bakery-background.jpg'
+    );
+
+    this.scene.background = backgroundTexture;
 
     //save scene as JSON
 
