@@ -271,5 +271,12 @@ public class KreasController{
         return outputParameter;
     }
 
+    @PostMapping(path = "/get-metadata")
+    public Map<String, Object> getMetadata(@RequestBody Search search){
+        Map<String, Object> output = kreasDAO.getMetadata(search.getQuery());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
+        return outputParameter;
+    }
 
 }

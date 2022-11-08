@@ -268,7 +268,7 @@ public class KreasDAO {
 
     public Map<String, Object> getRecommendation(){
         try{
-            String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, it.metadata, a.username  from items it inner join account a on it.user_id_seller = a.user_id  order by random() limit 10\n";
+            String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, a.username  from items it inner join account a on it.user_id_seller = a.user_id  order by random() limit 10\n";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(recommendationList);
             System.out.println(listItem);
             Map<String, Object> errorMessage = new HashMap<>();
@@ -297,7 +297,7 @@ public class KreasDAO {
         Map<String, Object> output = new HashMap<>();
         Map<String, Object> errorMessage = new HashMap<>();
         try{
-            String searchList = "select i.items_id, i.user_id_seller  as \"user_id\", i.items_name, i.price, '4.5' as \"rating_value\", i.sold_amount, i.metadata, a.username from items i inner join category c on c.category_id = i.category_id inner join account a ON a.user_id = i.user_id_seller  where lower(i.items_name) like lower('%" + search_query + "%') or lower(c.category_name) like lower('%" + search_query + "%') or lower(a.username) like lower('%" + search_query + "%')";
+            String searchList = "select i.items_id, i.user_id_seller  as \"user_id\", i.items_name, i.price, '4.5' as \"rating_value\", i.sold_amount, a.username from items i inner join category c on c.category_id = i.category_id inner join account a ON a.user_id = i.user_id_seller  where lower(i.items_name) like lower('%" + search_query + "%') or lower(c.category_name) like lower('%" + search_query + "%') or lower(a.username) like lower('%" + search_query + "%')";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(searchList);
 
 
@@ -305,6 +305,32 @@ public class KreasDAO {
             errorMessage.put("message", "success");
             if(listItem.isEmpty()){
                 errorMessage.put("message", "search is empty");
+            }
+            output.put("message", listItem);
+            output.put("error_message", errorMessage);
+        }
+        catch (Exception e){
+            errorMessage.put("status", "400");
+            errorMessage.put("message", "failed");
+            output.put("error_message", errorMessage);
+        }
+
+        return output;
+    }
+
+    public Map<String, Object>getMetadata(String in_items_id){
+
+        Map<String, Object> output = new HashMap<>();
+        Map<String, Object> errorMessage = new HashMap<>();
+        try{
+            String searchList = "select metadata from items where items_id = ? ";
+            List<Map<String, Object>> listItem = jdbcTemplate.queryForList(searchList, in_items_id);
+
+
+            errorMessage.put("status", "200");
+            errorMessage.put("message", "success");
+            if(listItem.isEmpty()){
+                errorMessage.put("message", "metadata isn't found");
             }
             output.put("message", listItem);
             output.put("error_message", errorMessage);

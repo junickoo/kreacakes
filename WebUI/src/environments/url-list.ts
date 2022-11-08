@@ -22,5 +22,7 @@ export class ApiUrl {
   public static readonly getRecommendation =
     'http://localhost:8080/kreas/get-recommendation';
   public static readonly getSearch = 'http://localhost:8080/kreas/get-search';
+  public static readonly getMetadata =
+    'http://localhost:8080/kreas/get-metadata';
   public static readonly snapPayment = 'http://localhost:3000';
 }

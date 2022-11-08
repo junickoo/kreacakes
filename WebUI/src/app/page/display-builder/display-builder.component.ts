@@ -77,6 +77,9 @@ export class DisplayBuilderComponent implements OnInit {
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
   }
+  birthdaytopImg(event: any) {
+    this.ShapesService.birthdaytopUpload(event);
+  }
 
   frontImg(event: any) {
     this.ShapesService.frontUpload(event);

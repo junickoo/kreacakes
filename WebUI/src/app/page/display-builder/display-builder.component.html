@@ -1,4 +1,11 @@
 <div class="file-upload" *ngIf="this.shapes == 'cube'">
+  <label for="image-file">Top Image : </label>
+  <input
+    id="image-file"
+    (change)="birthdaytopImg($event)"
+    type="file"
+    #imageFile
+  />
   <label for="image-file">Front Image : </label>
   <input id="image-file" (change)="frontImg($event)" type="file" #imageFile />
   <label for="image-file">Back Image : </label>

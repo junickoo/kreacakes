@@ -24,11 +24,22 @@ export class ShapesService {
     }
   }
   sourceFile: any = {
+    top: '',
     front: '',
     back: '',
     left: '',
     right: '',
   };
+  birthdaytopUpload(imageFile: any) {
+    var reader = new FileReader();
+    const file = imageFile.target.files[0];
+
+    reader.onload = (e) => (this.sourceFile.top = reader.result);
+
+    reader.readAsDataURL(file);
+    // formData.append('photo', photo);
+    // fetch('/upload/image', { method: 'POST', body: formData });
+  }
   frontUpload(imageFile: any) {
     var reader = new FileReader();
     const file = imageFile.target.files[0];
@@ -125,6 +136,7 @@ export class ShapesService {
     var cubeGeometry = new THREE.BoxGeometry(6, 4, 6);
     var cubeMaterialArray = [];
 
+    var textureAtas = new THREE.TextureLoader().load(this.sourceFile.top);
     var textureDepan = new THREE.TextureLoader().load(this.sourceFile.front);
     var textureBelakang = new THREE.TextureLoader().load(this.sourceFile.back);
     var textureKiri = new THREE.TextureLoader().load(this.sourceFile.left);
@@ -149,7 +161,16 @@ export class ShapesService {
         })
       );
     } //belakang
-    cubeMaterialArray.push(this.material); //atas
+
+    if (this.sourceFile.top == '') {
+      cubeMaterialArray.push(this.material);
+    } else {
+      cubeMaterialArray.push(
+        new THREE.MeshBasicMaterial({
+          map: textureAtas,
+        })
+      );
+    } //atas
     cubeMaterialArray.push(this.material); //bawah
 
     if (this.sourceFile.left == '') {
