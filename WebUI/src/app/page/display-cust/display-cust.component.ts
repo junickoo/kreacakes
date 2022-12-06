@@ -40,7 +40,7 @@ export class DisplayCustComponent implements OnInit {
         const sceneLoader = new THREE.ObjectLoader().parse(
           this.serializedScene
         );
-        const serial = JSON.stringify(this.scene.toJSON());
+        // const serial = JSON.stringify(this.scene.toJSON());
         this.scene.add(sceneLoader);
 
         //save scene as JSON

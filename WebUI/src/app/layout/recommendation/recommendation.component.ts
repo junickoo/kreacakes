@@ -66,7 +66,7 @@ export class RecommendationComponent implements OnInit {
     this.products2 = this.productsArray[this.prd2];
     this.products3 = this.productsArray[this.prd3];
     this.products4 = this.productsArray[this.prd4];
-    console.log(this.products1.sold_amount);
+    console.log(response);
   }
   itemsCard(details: product) {
     var detailsString = JSON.stringify(details);

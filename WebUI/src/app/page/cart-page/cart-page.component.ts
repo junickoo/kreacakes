@@ -37,9 +37,12 @@ export class CartPageComponent implements OnInit {
       .subscribe((response) => this.setCartItems(response));
   }
   cartItems: any = [{}];
+  category: any;
   setCartItems(response: any) {
     console.log(response.message);
     this.cartItems = response.message;
+    this.category = this.cartItems.category_name;
+    console.log(this.category);
     console.log(this.cartItems);
     this.grandTotal = 0;
     this.totalPrice = 0;

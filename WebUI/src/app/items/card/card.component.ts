@@ -7,8 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
   @Input() productsDetail = <product>{};
+  category: any;
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.productsDetail.category);
+    if (this.productsDetail.category == 'birthday_cake') {
+      this.category = 'cake';
+    } else {
+      this.category = this.productsDetail.category;
+    }
+  }
 }
 
 type product = {
@@ -19,4 +27,5 @@ type product = {
   rating_value: number;
   sold_amount: number;
   metadata: string;
+  category: string;
 };

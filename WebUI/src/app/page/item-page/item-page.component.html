@@ -1,7 +1,15 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="component-background">
-  <div class="item-image" (click)="productDisp()">
-    <img src="assets/products/product1.png" alt="product image" />
+  <div
+    class="item-image"
+    (click)="productDisp()"
+    (mouseover)="category = 'preview'"
+    (mouseout)="category = details.category"
+  >
+    <p *ngIf="category === 'birthday_cake'">cake</p>
+    <p *ngIf="category != 'birthday_cake'">
+      {{ category }}
+    </p>
   </div>
   <div class="item-description">
     <h1 style="font-weight: 700">{{ details.items_name }}</h1>
@@ -55,7 +63,7 @@
         <button class="cart" [disabled]="quantity < 1" (click)="addCart()">
           +Cart
         </button>
-        <button class="checkout" [disabled]="quantity < 1">Checkout</button>
+        <!-- <button class="checkout" [disabled]="quantity < 1">Checkout</button> -->
       </div>
       <div class="wishlist">
         <span

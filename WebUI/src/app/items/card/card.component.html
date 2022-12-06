@@ -8,33 +8,31 @@
     border-radius: 15px;
   "
 >
-  <img
-    src="assets/products/product1.png"
-    style="width: 7em; margin: 5px auto -60px auto"
-  />
-  <div class="card-text" style="display: grid; margin: auto">
-    <p style="font-size: 1.3em; font-weight: 500; margin: 0 0">
+  <div class="display-picture">
+    <p *ngIf="this.productsDetail.category === 'birthday_cake'">cake</p>
+    <p *ngIf="this.productsDetail.category != 'birthday_cake'">
+      {{ this.productsDetail.category }}
+    </p>
+  </div>
+  <div class="card-text" style="display: grid; margin: 0 auto">
+    <p style="font-size: 1.3em; font-weight: 500; margin: 0 auto">
       {{ this.productsDetail.items_name }}
     </p>
     <div
       class="price"
       style="
         display: flex;
-        margin-top: -5px;
-        font-size: 0.7em;
+        font-size: 0.8em;
+        letter-spacing: 1px;
         font-weight: 700;
+        margin: 0 auto;
       "
     >
-      <p style="margin: 0 0">Rp. {{ this.productsDetail.price }}</p>
+      <p style="margin: 0">Rp. {{ this.productsDetail.price }}</p>
     </div>
     <div
       class="rating"
-      style="
-        display: flex;
-        align-items: center;
-        margin-left: -5px;
-        margin-top: -3px;
-      "
+      style="display: flex; align-items: center; margin: 0 auto"
     >
       <span
         ><img

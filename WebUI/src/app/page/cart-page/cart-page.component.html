@@ -39,9 +39,12 @@
         <span style="flex: 1; align-self: center"
           ><img src="assets/icon/check-icon-filled.png" alt="" />
         </span>
-        <span style="flex: 1"
-          ><img src="assets/products/product1.png" alt=""
-        /></span>
+        <span style="flex: 1" class="display-picture">
+          <p *ngIf="a.category_name === 'birthday_cake'">cake</p>
+          <p *ngIf="a.category_name != 'birthday_cake'">
+            {{ a.category_name }}
+          </p></span
+        >
         <div
           style="
             flex: 5;
@@ -68,18 +71,18 @@
         <div style="flex: 2; display: grid; gap: 5px">
           <div
             class=""
-            style="display: flex; height: 2.5em; width: 10em; margin: 0"
+            style="display: flex; height: 2.5em; width: 10em; margin: 15px 0px"
           >
             <div class="quantity-btn">
-              <div class="quantity-min" style="border-radius: 5px 0px 0px 5px">
+              <!-- <div class="quantity-min" style="border-radius: 5px 0px 0px 5px">
                 <p style="margin: auto">-</p>
-              </div>
+              </div> -->
               <div class="quantity-number">
-                <p style="margin: auto">{{ a.quantity }}</p>
+                <p style="margin: auto">Quantity : {{ a.quantity }}</p>
               </div>
-              <div class="quantity-plus" style="border-radius: 0px 5px 5px 0px">
+              <!-- <div class="quantity-plus" style="border-radius: 0px 5px 5px 0px">
                 <p style="margin: auto">+</p>
-              </div>
+              </div> -->
             </div>
           </div>
           <button
