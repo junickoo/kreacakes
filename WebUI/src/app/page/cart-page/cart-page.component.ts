@@ -8,7 +8,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { DialogOverviewComponent } from 'src/app/layout/dialog-overview/dialog-overview.component';
-
+declare var snap: any;
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
@@ -59,36 +59,46 @@ export class CartPageComponent implements OnInit {
     console.log(item.cart_items_id);
     return item.cart_items_id;
   }
-  payCart() {
-    let userId = sessionStorage.getItem('user_id');
-    this.itemSevice.payCart(userId).subscribe((data) => console.log(data));
-    this.itemSevice
-      .snapApi(this.totalPrice, this.cartItems[0].cart_id)
-      .subscribe((data: any) => {
-        window.open(data.redirect_url);
-      });
-
-    // const dialogRef = this.dialog.open(DialogOverviewComponent, {
-    //   width: '250px',
-    //   data: {
-    //     type: 'login',
-    //     message: 'Payment Success!',
-    //   },
-    // });
-
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   window.location.reload();
-    // });
+  dialogOpen(msg: any) {
+    alert(msg);
     const dialogRef = this.dialog.open(DialogOverviewComponent, {
-      width: '250px',
+      width: '300px',
       data: {
         type: 'login',
-        message: 'Payment Success!',
+        message: msg,
       },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       window.location.reload();
     });
+  }
+  payCart() {
+    let payResult: any;
+    let userId = sessionStorage.getItem('user_id');
+    this.itemSevice
+      .snapApi(this.totalPrice, this.cartItems[0].cart_id)
+      .subscribe((data: any) => {
+        // window.open(data.redirect_url, '_self');
+        snap.pay(data.token, {
+          onSuccess: (result: any) => {
+            this.itemSevice.payCart(userId).subscribe(() => {
+              alert('Payment Success!');
+              window.location.reload();
+            });
+          },
+          onPending: (result: any) => {
+            this.itemSevice.payCart(userId).subscribe(() => {
+              alert('Payment Pending!');
+              window.location.reload();
+            });
+          },
+          onError: (result: any) => {
+            alert('Payment Error Please Try Again Later!');
+          },
+          onClose: (result: any) => {
+            alert('Payment Failed!');
+          },
+        });
+      });
   }
 }
