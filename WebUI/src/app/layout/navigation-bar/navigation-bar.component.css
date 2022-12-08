@@ -40,11 +40,18 @@ nav {
   color: #4a6163;
   font-weight: 600;
 }
-.btn-history {
+.btn-logout {
   flex: 0.5;
   height: 2em;
   border-radius: 5px;
   background-color: #ffc94b;
+}
+.btn-logout:hover > p {
+  color: white;
+}
+.btn-logout:hover {
+  background-color: rgb(255, 201, 75, 0.8);
+  transition: all 2s;
 }
 .btn-profile {
   flex: 0;

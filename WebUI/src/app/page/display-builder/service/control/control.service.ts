@@ -44,7 +44,6 @@ export class ControlService {
             metadata
           )
           .subscribe((data: any) => {
-            alert(JSON.stringify(data.data || ''));
             if (data.status == '200') {
               const dialogRef = this.dialog.open(DialogOverviewComponent, {
                 width: '500px',
@@ -109,29 +108,12 @@ export class ControlService {
     folder.addColor(params, 'color').onChange(() => {
       this.ShapesService.material.color.set(params.color);
     });
-
-    // var inputFile = {
-    //   inputFile: () => {
-    //     var inputImg = document.getElementById('image-file');
-    //     inputImg?.click();
-    //     inputImg?
-    //   },
-    // };
-    // texture.add(inputFile, 'inputFile').name('Image Depan');
     var detailsItem = JSON.parse(
       sessionStorage.getItem('detailsAddItem') || ''
     );
     if (detailsItem.category == 'cat_2') {
       folder.add(this.cakeShapes, 'shape', this.shapes).onChange((e) => {
         console.log(e.value);
-        // console.log(this.cakeShapes.shape);
-        // if (this.cakeShapes.shape == 'cube') {
-        //   texture.remove(texture.__controllers[0]);
-        //   texture.add(inputFile, 'inputFile').name('Image Depan');
-        // } else if (this.cakeShapes.shape == 'cyllinder') {
-        //   texture.remove(texture.__controllers[0]);
-        //   texture.add(inputFile, 'inputFile').name('Image Cyll');
-        // }
       });
     } else if (detailsItem.category == 'cat_1') {
       this.cakeShapes.shape = 'cookies';

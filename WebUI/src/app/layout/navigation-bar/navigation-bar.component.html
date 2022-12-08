@@ -13,7 +13,7 @@
       <img src="/assets/icon/KreaLogo.png" style="height: 2em" alt="" />
     </div>
     <div class="search" style="flex: 6">
-      <input type="text" #search name="search" /><img
+      <input type="text" #search name="search" [value]="query" /><img
         src="/assets/icon/SearchIcon.png"
         class="btn-icon"
         alt=""
@@ -28,14 +28,8 @@
         alt=""
       />
     </div>
-    <div class="icon btn-icon">
-      <img src="/assets/icon/NotificationIcon.png" style="height: 2em" alt="" />
-    </div>
-    <div class="icon btn-icon btn-history">
-      <p>History</p>
-    </div>
-    <div class="icon btn-icon btn-profile" (click)="logout()">
-      <img src="/assets/icon/Profile.png" alt="" />
+    <div class="icon btn-icon btn-logout" (click)="logout()">
+      <p>Logout</p>
     </div>
   </div>
 </nav>

@@ -146,7 +146,7 @@ public class KreasDAO {
         System.out.println(listCart.get(0).get("cart_id"));
         String in_cart_id = listCart.get(0).get("cart_id").toString();
 
-        String sql ="select * from cart_items inner join items on items.items_id = cart_items.items_id  where cart_id = ?";
+        String sql ="select * from cart_items inner join items on items.items_id = cart_items.items_id inner join category on category.category_id = items.category_id  where cart_id = ?";
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, in_cart_id);
         System.out.println(list);
 
@@ -268,7 +268,7 @@ public class KreasDAO {
 
     public Map<String, Object> getRecommendation(){
         try{
-            String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, a.username  from items it inner join account a on it.user_id_seller = a.user_id  order by random() limit 10\n";
+            String recommendationList = "select it.items_id, it.user_id_seller  as \"user_id\", it.items_name, it.price, '4.5' as \"rating_value\", it.sold_amount, a.username, c.category_name as \"category\"  from items it inner join account a on it.user_id_seller = a.user_id inner join category c on it.category_id = c.category_id  order by random() limit 10\n";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(recommendationList);
             System.out.println(listItem);
             Map<String, Object> errorMessage = new HashMap<>();
@@ -297,7 +297,7 @@ public class KreasDAO {
         Map<String, Object> output = new HashMap<>();
         Map<String, Object> errorMessage = new HashMap<>();
         try{
-            String searchList = "select i.items_id, i.user_id_seller  as \"user_id\", i.items_name, i.price, '4.5' as \"rating_value\", i.sold_amount, a.username from items i inner join category c on c.category_id = i.category_id inner join account a ON a.user_id = i.user_id_seller  where lower(i.items_name) like lower('%" + search_query + "%') or lower(c.category_name) like lower('%" + search_query + "%') or lower(a.username) like lower('%" + search_query + "%')";
+            String searchList = "select i.items_id, i.user_id_seller  as \"user_id\", i.items_name, i.price, '4.5' as \"rating_value\", i.sold_amount, a.username, c.category_name as \"category\" from items i inner join category c on c.category_id = i.category_id inner join account a ON a.user_id = i.user_id_seller  where lower(i.items_name) like lower('%" + search_query + "%') or lower(c.category_name) like lower('%" + search_query + "%') or lower(a.username) like lower('%" + search_query + "%')";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(searchList);
 
 

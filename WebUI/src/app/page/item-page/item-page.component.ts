@@ -16,6 +16,7 @@ export class ItemPageComponent implements OnInit {
     private dialog: MatDialog
   ) {}
   details = JSON.parse(sessionStorage.getItem('itemDetails') || '{}');
+  category = this.details.category;
   ngOnInit(): void {
     console.log(this.details);
   }
@@ -36,7 +37,8 @@ export class ItemPageComponent implements OnInit {
       .subscribe((data) => this.validateCart(data));
   }
   validateCart(response: any) {
-    if (response.status == 200) {
+    console.log(response);
+    if (response.status.status == 200) {
       const dialogRef = this.dialog.open(DialogOverviewComponent, {
         width: '250px',
         data: {

@@ -9,11 +9,26 @@
   color: #4a6163;
 }
 .item-image {
-  flex: 1;
   display: flex;
+  border: 2px solid #ffc94b;
+  background-color: #4a6163;
+  border-radius: 5px;
+  width: 25em;
+  height: 25em;
+  transition: all 1s;
+  margin: 10px auto;
 }
-.item-image > img {
-  width: 80%;
+.item-image:hover {
+  background-color: rgb(74, 97, 99, 0.6);
+  transition: all 1s;
+  cursor: pointer;
+}
+.item-image > p {
+  font-size: 2.5em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ffc94b;
+  transform: rotate(-45deg);
   margin: auto;
 }
 
@@ -122,9 +137,9 @@
   gap: 5px;
 }
 .buy-button > button {
+  width: 40%;
   background-color: transparent;
   border: #4a6163 2px solid;
-  flex: 1;
   font-weight: 700;
   color: #4a6163;
   border-radius: 10px;

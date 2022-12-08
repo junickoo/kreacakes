@@ -11,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationBarComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient) {}
 
-  ngOnInit(): void {}
+  query: any;
+  ngOnInit(): void {
+    this.query = sessionStorage.getItem('search_query');
+  }
 
   homeLink() {
     this.router.navigateByUrl('/homepage');

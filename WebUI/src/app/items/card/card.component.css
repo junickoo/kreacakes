@@ -1,3 +1,19 @@
 * {
   color: #4a6163;
 }
+.display-picture > p {
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #ffc94b;
+  transform: rotate(-45deg);
+  margin: auto;
+}
+.display-picture {
+  display: flex;
+  border: 2px solid #ffc94b;
+  background-color: #4a6163;
+  border-radius: 5px;
+  width: 6em;
+  height: 6em;
+  margin: 10px auto;
+}

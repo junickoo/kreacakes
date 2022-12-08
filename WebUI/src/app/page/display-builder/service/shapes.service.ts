@@ -128,8 +128,6 @@ export class ShapesService {
     reader.onload = (e) => (this.cookies.bot = reader.result);
 
     reader.readAsDataURL(file);
-    // formData.append('photo', photo);
-    // fetch('/upload/image', { method: 'POST', body: formData });
   }
   cube() {
     //create cube
