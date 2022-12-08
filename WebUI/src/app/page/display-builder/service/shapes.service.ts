@@ -139,7 +139,6 @@ export class ShapesService {
     var textureBelakang = new THREE.TextureLoader().load(this.sourceFile.back);
     var textureKiri = new THREE.TextureLoader().load(this.sourceFile.left);
     var textureKanan = new THREE.TextureLoader().load(this.sourceFile.right);
-    // var texture = THREE.ImageUtils.loadTexture('assets/graphs/bricks.jpg');
 
     if (this.sourceFile.front == '') {
       cubeMaterialArray.push(this.material);
@@ -198,7 +197,6 @@ export class ShapesService {
     this.group.children = [];
 
     this.group.add(cube);
-    // setLine(cubeGeometry);
   }
 
   cyllinder() {
