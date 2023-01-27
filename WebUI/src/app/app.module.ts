@@ -21,9 +21,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddItemPageComponent } from './page/add-item-page/add-item-page.component';
 import { DialogOverviewComponent } from './layout/dialog-overview/dialog-overview.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 import { DisplayBuilderComponent } from './page/display-builder/display-builder.component';
 import { DisplayCustComponent } from './page/display-cust/display-cust.component';
 import { SearchInquiryComponent } from './page/search-inquiry/search-inquiry.component';
+import { OrderHistoryComponent } from './page/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { SearchInquiryComponent } from './page/search-inquiry/search-inquiry.com
     DisplayBuilderComponent,
     DisplayCustComponent,
     SearchInquiryComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,11 @@ import { SearchInquiryComponent } from './page/search-inquiry/search-inquiry.com
         {
           path: 'display-builder',
           component: DisplayBuilderComponent,
+          canActivate: [AuthGuard],
+        },
+        {
+          path: 'history',
+          component: OrderHistoryComponent,
           canActivate: [AuthGuard],
         },
         {
@@ -113,6 +121,7 @@ import { SearchInquiryComponent } from './page/search-inquiry/search-inquiry.com
     MatTableModule,
     MatButtonModule,
     MatDialogModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

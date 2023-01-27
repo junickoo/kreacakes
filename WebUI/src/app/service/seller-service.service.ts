@@ -21,6 +21,13 @@ export class SellerServiceService {
     });
   }
 
+  getSellingPerformance(user_id: any, interval: any) {
+    return this.http.post(ApiUrl.getPerformance, {
+      userId: user_id,
+      interval: interval,
+    });
+  }
+
   addItems(name: any, category: any, price: any, userId: any, metadata: any) {
     return this.http.post(ApiUrl.addItem, {
       userId: userId,

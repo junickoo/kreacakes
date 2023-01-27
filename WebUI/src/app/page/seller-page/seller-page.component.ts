@@ -6,8 +6,10 @@ import {
 import { Router } from '@angular/router';
 import { SellerServiceService } from './../../service/seller-service.service';
 import { LoginServiceService } from 'src/app/service/login-service.service';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-seller-page',
@@ -25,22 +27,19 @@ export class SellerPageComponent implements OnInit {
     private dialog: MatDialog
   ) {
     // this.dataSource = JSON.parse(sessionStorage.getItem('sellerItem') || '{}');
-    this.sellerService
-      .getItemsSeller(this.userId)
-      .subscribe((dataparam: any) => {
-        this.dataSource = dataparam.message;
-      });
+
     this.sellerService.getOrder(this.userId).subscribe((dataparam: any) => {
       this.dataSourceOrder = dataparam.message;
       console.log(this.dataSourceOrder);
     });
   }
+  @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = [
-    'NAME',
-    'PRICE',
-    'SOLD_AMOUNT',
-    'CATEGORY',
-    'BUTTON',
+    'items_name',
+    'price',
+    'sold_amount',
+    'category_name',
+    'button',
   ];
   displayedColumnsOrder: string[] = [
     'ITEMS_NAME',
@@ -53,6 +52,13 @@ export class SellerPageComponent implements OnInit {
     this.displayedColumnsOrder.forEach((el) => {
       this.clicked.push(false);
     });
+    this.sellerService
+      .getItemsSeller(this.userId)
+      .subscribe((dataparam: any) => {
+        this.dataSource = new MatTableDataSource<dataSource>(dataparam.message);
+        console.log('test');
+        console.log(this.dataSource);
+      });
     // this.loginservice.getItemsSeller();
     // let dataDisplay = JSON.parse(dataTemp);
   }
@@ -109,4 +115,39 @@ export class SellerPageComponent implements OnInit {
   sendItem(cartItemId: any, response: any) {
     this.sellerService.sendItem(cartItemId).subscribe((data) => console.log);
   }
+  getFilterMonth(interval: any) {
+    console.log(interval.target.value);
+    if (interval.target.value === 'allTime') {
+      console.log('vale');
+      this.sellerService
+        .getItemsSeller(this.userId)
+        .subscribe((dataparam: any) => {
+          this.dataSource = new MatTableDataSource<dataSource>(
+            dataparam.message
+          );
+          console.log(dataparam);
+        });
+    } else {
+      this.sellerService
+        .getSellingPerformance(this.userId, interval.target.value)
+        .subscribe((dataparam: any) => {
+          this.dataSource = new MatTableDataSource<dataSource>(
+            dataparam.message
+          );
+          console.log(this.dataSource);
+        });
+    }
+  }
+  announceSortChange(sortState: Sort) {
+    console.log(sortState);
+    console.log(this.dataSource);
+    this.dataSource.sort = this.sort;
+  }
+}
+interface dataSource {
+  items_id: any;
+  price: any;
+  sold_amount: any;
+  items_name: any;
+  category_name: any;
 }

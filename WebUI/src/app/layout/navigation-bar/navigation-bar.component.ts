@@ -42,4 +42,7 @@ export class NavigationBarComponent implements OnInit {
     sessionStorage.clear();
     window.location.reload();
   }
+  history() {
+    this.router.navigateByUrl('/history');
+  }
 }

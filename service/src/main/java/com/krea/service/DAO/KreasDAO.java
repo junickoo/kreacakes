@@ -178,7 +178,7 @@ public class KreasDAO {
         Map<String, Object> output = new HashMap<>();
         Map<String, Object> errorMessage = new HashMap<>();
         try{
-            String sellerItem ="select * from items inner join category on  items.category_id = category.category_id where user_id_seller = ?";
+            String sellerItem ="select items.items_id, items.price, items.sold_amount, items.items_name, category.category_name from items inner join category on  items.category_id = category.category_id where user_id_seller = ?";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, in_user_id);
             errorMessage.put("status", "200");
             errorMessage.put("message", "success");
@@ -196,7 +196,30 @@ public class KreasDAO {
 
         return output;
     }
+    public Map<String, Object> getPerformance(String in_user_id, String interval){
 
+        Map<String, Object> output = new HashMap<>();
+        Map<String, Object> errorMessage = new HashMap<>();
+        try{
+            String sellerItem ="select il.items_id, il.sold_amount, il.items_name, il.price, c.category_name  from (select i.items_id ,count(ci.quantity) AS sold_amount  , i.items_name, i.price, i.category_id  from cart_items ci inner join items i on ci.items_id = i.items_id inner join cart on ci.cart_id = cart.cart_id where cart.paid = true and i.user_id_seller = ? and  ci.\"timestamp\" > now() - INTERVAL '" + interval.toString() + "' group by i.items_id)il inner join category c on c.category_id = il.category_id";
+            List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, in_user_id);
+            errorMessage.put("status", "200");
+            errorMessage.put("message", "success");
+            if(listItem.isEmpty()){
+                errorMessage.put("message", "user didn't have any item");
+            }
+            output.put("message", listItem);
+            output.put("error_message", errorMessage);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            errorMessage.put("status", "400");
+            errorMessage.put("message", "failed");
+            output.put("error_message", errorMessage);
+        }
+
+        return output;
+    }
     public Map<String, Object> getCategory(){
 
         Map<String, Object> output = new HashMap<>();
@@ -219,6 +242,51 @@ public class KreasDAO {
         }
 
         return output;
+    }public Map<String, Object> getCart(String user_id){
+
+        Map<String, Object> output = new HashMap<>();
+        Map<String, Object> errorMessage = new HashMap<>();
+        try{
+            String sellerItem ="select * from cart where user_id = ?";
+            List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, user_id);
+            errorMessage.put("status", "200");
+            errorMessage.put("message", "success");
+            if(listItem.isEmpty()){
+                errorMessage.put("message", "category is empty");
+            }
+            output.put("message", listItem);
+            output.put("error_message", errorMessage);
+        }
+        catch (Exception e){
+            errorMessage.put("status", "400");
+            errorMessage.put("message", "failed");
+            output.put("error_message", errorMessage);
+        }
+
+        return output;
+    }public Map<String, Object> getCartDetails(String cart_id){
+
+        Map<String, Object> output = new HashMap<>();
+        Map<String, Object> errorMessage = new HashMap<>();
+        try{
+            String sellerItem ="select cart_items.timestamp, cart_items.quantity, cart_items.sent, i.price, i.items_name from cart_items inner join items i on i.items_id = cart_items.items_id where cart_id = ?";
+            System.out.println(cart_id);
+            List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, cart_id);
+            errorMessage.put("status", "200");
+            errorMessage.put("message", "success");
+            if(listItem.isEmpty()){
+                errorMessage.put("message", "cart is empty");
+            }
+            output.put("message", listItem);
+            output.put("error_message", errorMessage);
+        }
+        catch (Exception e){
+            errorMessage.put("status", "400");
+            errorMessage.put("message", "failed");
+            output.put("error_message", errorMessage);
+        }
+
+        return output;
     }
     public Map<String, Object> getOrderList(String seller_id){
 
@@ -226,7 +294,7 @@ public class KreasDAO {
         Map<String, Object> errorMessage = new HashMap<>();
         try{
 
-            String orderList = "select * from cart inner join cart_items on cart_items.cart_id = cart.cart_id inner join items on items.user_id_seller  = ? and cart_items.items_id = items.items_id  where cart.paid = true order by cart_items.sent  asc";
+            String orderList = "select cart.cart_id, cart.user_id, cart.paid, cart_items.cart_items_id, cart_items.items_id, cart_items.quantity, cart_items.sent, cart_items.received, items.items_name, items.user_id_seller, items.price, category.category_name from cart inner join cart_items on cart_items.cart_id = cart.cart_id inner join items on items.user_id_seller  = ? and cart_items.items_id = items.items_id inner join category on category.category_id = items.category_id  where cart.paid = true order by cart_items.sent  asc";
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(orderList, seller_id);
 
             errorMessage.put("status", "200");
@@ -241,6 +309,7 @@ public class KreasDAO {
             errorMessage.put("status", "400");
             errorMessage.put("message", "failed");
             output.put("error_message", errorMessage);
+            System.out.println(e.getMessage());
         }
 
         return output;

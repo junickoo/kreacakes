@@ -252,8 +252,27 @@ public class KreasController{
         outputParameter.put("message", output.get("message"));
         outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
+    } @PostMapping(path ="/get-cart")
+    public Map<String, Object> getCart(@RequestBody ClearCart clearCart){
+        Map<String, Object> output = kreasDAO.getCart(clearCart.getUserId());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
+        return outputParameter;
     }
-
+    @PostMapping(path="/get-cart-details")
+    public Map<String, Object> getCartDetails(@RequestBody CartDetails cartDetails){
+        Map<String, Object> output = kreasDAO.getCartDetails(cartDetails.getCartId());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
+        return outputParameter;
+    }
+    @PostMapping(path ="/get-performance")
+    public Map<String, Object> getPerformance(@RequestBody SellingPerformance sellingPerformance){
+        Map<String, Object> output = kreasDAO.getPerformance(sellingPerformance.getUserId(), sellingPerformance.getInterval());
+        outputParameter.put("message", output.get("message"));
+        outputParameter.put("error_schema", output.get("error_message"));
+        return outputParameter;
+    }
     @GetMapping(path = "/get-recommendation")
     public Map<String, Object> getRecommendation(){
         Map<String, Object> output = kreasDAO.getRecommendation();

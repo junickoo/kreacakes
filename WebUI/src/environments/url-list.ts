@@ -10,6 +10,11 @@ export class ApiUrl {
   public static readonly payCart = 'http://localhost:8080/kreas/pay-cart';
   public static readonly getItemSeller =
     'http://localhost:8080/kreas/get-item-seller';
+  public static readonly getPerformance =
+    'http://localhost:8080/kreas/get-performance';
+  public static readonly getCart = 'http://localhost:8080/kreas/get-cart';
+  public static readonly getCartDetails =
+    'http://localhost:8080/kreas/get-cart-details';
   public static readonly delItemSeller =
     'http://localhost:8080/kreas/delete-items';
   public static readonly addItem = 'http://localhost:8080/kreas/insert-items';
