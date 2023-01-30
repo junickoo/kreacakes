@@ -136,11 +136,12 @@
         <button
           mat-raised-button
           color="primary"
+          [disabled]="element.sent || clicked[i]"
           [disabled]="element.sent"
           (click)="sendItem(element.cart_items_id, $event); clicked[i] = true"
         >
-          <p *ngIf="!element.sent">Send</p>
-          <p *ngIf="element.sent && !element.received">Sent</p>
+          <p *ngIf="!element.sent && !clicked[i]">Send</p>
+          <p *ngIf="(element.sent && !element.received) || clicked[i]">Sent</p>
           <p *ngIf="element.sent && element.received">Received</p>
         </button>
         <!-- <ng-container *ngIf="element.sent">Sent</ng-container> -->

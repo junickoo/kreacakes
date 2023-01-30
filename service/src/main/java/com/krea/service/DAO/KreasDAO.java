@@ -269,7 +269,7 @@ public class KreasDAO {
         Map<String, Object> output = new HashMap<>();
         Map<String, Object> errorMessage = new HashMap<>();
         try{
-            String sellerItem ="select cart_items.timestamp, cart_items.quantity, cart_items.sent, i.price, i.items_name from cart_items inner join items i on i.items_id = cart_items.items_id where cart_id = ?";
+            String sellerItem ="select cart_items.cart_items_id, cart_items.timestamp, cart_items.quantity, cart_items.sent, cart_items.received, i.price, i.items_name from cart_items inner join items i on i.items_id = cart_items.items_id where cart_id = ?";
             System.out.println(cart_id);
             List<Map<String, Object>> listItem = jdbcTemplate.queryForList(sellerItem, cart_id);
             errorMessage.put("status", "200");
@@ -329,6 +329,27 @@ public class KreasDAO {
         catch (Exception e){
             errorMessage.put("status", "200");
             errorMessage.put("message", "send items failed");
+            output.put("error_message", errorMessage);
+        }
+
+        return output;
+    }
+
+    public Map<String, Object> receiveItem(String cart_items_id){
+
+
+
+        Map<String, Object> output = new HashMap<>();
+        Map<String, Object> errorMessage = new HashMap<>();
+        try{
+            jdbcTemplate.update("update cart_items set received = true where cart_items_id = ? and sent = true and received = false", cart_items_id);
+            errorMessage.put("status", "200");
+            errorMessage.put("message", "receive items success");
+            output.put("error_message", errorMessage);
+        }
+        catch (Exception e){
+            errorMessage.put("status", "200");
+            errorMessage.put("message", "receive items failed");
             output.put("error_message", errorMessage);
         }
 

@@ -24,6 +24,8 @@ export class ApiUrl {
     'http://localhost:8080/kreas/get-category';
   public static readonly getOrder = 'http://localhost:8080/kreas/get-order';
   public static readonly sendItem = 'http://localhost:8080/kreas/send-item';
+  public static readonly receiveItem =
+    'http://localhost:8080/kreas/receive-item';
   public static readonly getRecommendation =
     'http://localhost:8080/kreas/get-recommendation';
   public static readonly getSearch = 'http://localhost:8080/kreas/get-search';

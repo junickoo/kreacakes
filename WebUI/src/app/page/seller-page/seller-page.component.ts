@@ -113,7 +113,9 @@ export class SellerPageComponent implements OnInit {
   }
   sended = false;
   sendItem(cartItemId: any, response: any) {
-    this.sellerService.sendItem(cartItemId).subscribe((data) => console.log);
+    this.sellerService
+      .sendItem(cartItemId)
+      .subscribe((data) => console.log(data));
   }
   getFilterMonth(interval: any) {
     console.log(interval.target.value);

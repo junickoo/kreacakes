@@ -14,6 +14,7 @@ export class OrderHistoryComponent implements OnInit {
   displayedColumns: string[] = ['cart_id', 'timestamp', 'details'];
   dataSource: any;
   userId = sessionStorage.getItem('user_id');
+  clicked = new Array();
   constructor(private http: HttpClient) {
     this.http
       .post(ApiUrl.getCart, { userId: this.userId })
@@ -55,8 +56,38 @@ export class OrderHistoryComponent implements OnInit {
             total += parseInt(element.price) * parseInt(element.quantity);
           });
           alert(details + '\n\n' + 'Total: ' + total);
+
+          params.message.forEach((element: any) => {
+            var status: any;
+            if (element.sent && !element.received) {
+              if (
+                confirm(
+                  'Receive Confirmation!\nItems Name: ' +
+                    element.items_name +
+                    '\nQuantity: ' +
+                    element.quantity
+                )
+              ) {
+                this.http
+                  .put(ApiUrl.receiveItem, {
+                    cart_items_id: element.cart_items_id,
+                  })
+                  .subscribe((data) => {
+                    console.log(
+                      element.items_name +
+                        element.quantity +
+                        ' Received ' +
+                        element.cart_items_id
+                    );
+                  });
+              } else {
+                console.log('Not received');
+              }
+            }
+          });
         }
       });
   }
+  receiveItem(id: any, response: any) {}
   ngOnInit(): void {}
 }

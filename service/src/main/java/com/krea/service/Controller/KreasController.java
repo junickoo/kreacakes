@@ -120,6 +120,14 @@ public class KreasController{
     public Map<String, Object> sendItem(@RequestBody CartItemsSend cartItemsSend){
         Map<String, Object> output = kreasDAO.sendItem(cartItemsSend.getCart_items_id());
 
+        outputParameter.put("error_schema", output.get("error_message"));
+        return outputParameter;
+    }
+    @PutMapping(path = "/receive-item")
+    public Map<String, Object> receiveItem(@RequestBody CartItemsSend cartItemsSend){
+        Map<String, Object> output = kreasDAO.receiveItem(cartItemsSend.getCart_items_id());
+        System.out.println(output);
+        outputParameter = new HashMap<String, Object>();
 
         outputParameter.put("error_schema", output.get("error_message"));
         return outputParameter;
